@@ -21,17 +21,77 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            display: block; /* Initially visible */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        #initial-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ffebee, #f44336);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #play-button {
+            background: url('https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/img/play-button.png') no-repeat center;
+            background-size: contain;
+            width: 200px;
+            height: 200px;
+            border: none;
+            cursor: pointer;
+            z-index: 1001;
+            transition: transform 0.3s ease;
+        }
+        #play-button:hover {
+            transform: scale(1.1);
+        }
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+        #mojang-logo {
+            width: 200px;
+            height: auto;
+            animation: bounce 1.5s infinite;
+        }
+        #loading-text {
+            font-family: 'Press Start 2P', cursive;
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-shadow: 0 0 5px #d32f2f, 0 0 10px #d32f2f;
+            margin-top: 20px;
+            animation: blink 1s step-end infinite;
+        }
+        #main-content {
+            display: none; /* Hidden until play button is clicked */
+            width: 100%;
+            height: 100%;
         }
         .minecraft-font {
             font-family: 'Press Start 2P', cursive;
-            text-shadow: 0 0 5px #d32f2f, 0 0 10px #d32f2f; /* Glowing red for headings */
+            text-shadow: 0 0 5px #d32f2f, 0 0 10px #d32f2f;
             letter-spacing: 1px;
             line-height: 1.4;
         }
         .small-text {
             color: #ffffff;
-            text-shadow: 0 0 3px #d32f2f, 0 0 6px #d32f2f; /* Subtle red glow for small text */
+            text-shadow: 0 0 3px #d32f2f, 0 0 6px #d32f2f;
             font-size: 1rem;
             line-height: 1.6;
             word-wrap: break-word;
@@ -39,6 +99,7 @@
         @media (max-width: 768px) {
             .minecraft-font { font-size: 0.9rem; letter-spacing: 2px; }
             .small-text { font-size: 0.9rem; }
+            #play-button { width: 150px; height: 150px; }
         }
         #particles-js {
             position: fixed;
@@ -64,11 +125,11 @@
         .navbar {
             background-color: rgba(0, 0, 0, 0.9);
             transition: all 0.4s ease;
-            border-bottom: 2px solid #d32f2f; /* Red border */
+            border-bottom: 2px solid #d32f2f;
         }
         .navbar.scrolled {
             background-color: #ffebee !important;
-            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.6); /* Red glow shadow */
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.6);
         }
         .nav-link {
             color: #ffffff;
@@ -132,52 +193,6 @@
             .minecraft-font { font-size: 0.8rem; }
             .small-text { font-size: 0.8rem; }
         }
-        /* Mojang Loading Screen Styles */
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000000;
-            display: none; /* Hidden initially */
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 1;
-            transition: opacity 1s ease-in-out;
-        }
-        #mojang-logo {
-            width: 200px;
-            height: auto;
-            animation: bounce 1.5s infinite;
-        }
-        #loading-text {
-            font-family: 'Press Start 2P', cursive;
-            color: #ffffff;
-            font-size: 1.5rem;
-            text-shadow: 0 0 5px #d32f2f, 0 0 10px #d32f2f;
-            margin-top: 20px;
-            animation: blink 1s step-end infinite;
-        }
-        #play-button {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            display: none; /* Hidden initially */
-            background: url('https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/img/play-button.png') no-repeat center;
-            background-size: contain;
-            width: 200px;
-            height: 200px;
-            border: none;
-            cursor: pointer;
-            z-index: 1001;
-            transition: transform 0.3s ease;
-        }
-        #play-button:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-        }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -188,184 +203,173 @@
     </style>
 </head>
 <body>
+    <!-- Initial Screen with Play Button -->
+    <div id="initial-screen">
+        <button id="play-button"></button>
+    </div>
+
     <!-- Mojang Loading Screen -->
     <div id="loading-screen">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Mojang_Studios_logo.svg/200px-Mojang_Studios_logo.svg.png" alt="Mojang Logo" id="mojang-logo">
         <div id="loading-text">Loading...</div>
     </div>
 
-    <!-- Play Button -->
-    <button id="play-button"></button>
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Floating Particles Background -->
+        <div id="particles-js"></div>
 
-    <!-- Floating Particles Background -->
-    <div id="particles-js"></div>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand minecraft-font" href="#" style="color: #d32f2f;">Nothing SMP</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#players">Players</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#staff">Staff</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero animate-fadeIn">
-        <div class="container position-relative">
-            <h1 class="display-1 minecraft-font" style="color: #d32f2f;">Nothing SMP</h1>
-            <p class="lead small-text">A Lightly Modded Minecraft Survival Multiplayer Server</p>
-            <a href="#contact" class="btn btn-lg btn-discord">Join Us</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section parallax" style="background-image: url('assets/images/about-bg.jpg');" data-aos="fade-up">
-        <div class="container">
-            <h2 class="minecraft-font mb-5" style="color: #d32f2f;">About Nothing SMP</h2>
-            <p class="text-center small-text">Nothing SMP is a lightly modded Survival Multiplayer server where players can build, explore, and thrive in a friendly community. With fair play as our core, fights occur only for valid reasons. Enjoy custom mods, an economy system, regular events, and more with our 20 dedicated players!</p>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="section" data-aos="fade-up">
-        <div class="container">
-            <h2 class="text-center minecraft-font mb-5" style="color: #d32f2f;">Server Features</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card feature-card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title minecraft-font" style="color: #d32f2f;">Lightly Modded</h5>
-                            <p class="card-text small-text">Vanilla-like gameplay with quality-of-life mods for an enhanced experience.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card feature-card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title minecraft-font" style="color: #d32f2f;">Fair PvP</h5>
-                            <p class="card-text small-text">Fights only for valid reasons—no griefing or random attacks.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card feature-card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title minecraft-font" style="color: #d32f2f;">Economy & Events</h5>
-                            <p class="card-text small-text">Player-driven economy with weekly events and custom builds.</p>
-                        </div>
-                    </div>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand minecraft-font" href="#" style="color: #d32f2f;">Nothing SMP</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#players">Players</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#staff">Staff</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
+        </nav>
 
-    <!-- Players Section -->
-    <section id="players" class="section parallax" style="background-image: url('assets/images/players-bg.jpg');" data-aos="fade-up">
-        <div class="container">
-            <h2 class="text-center minecraft-font mb-5" style="color: #d32f2f;">Our Players</h2>
-            <p class="text-center small-text">Join our vibrant community of 20 active players collaborating on massive builds, trading resources, and enjoying server events!</p>
-        </div>
-    </section>
+        <!-- Hero Section -->
+        <section id="home" class="hero animate-fadeIn">
+            <div class="container position-relative">
+                <h1 class="display-1 minecraft-font" style="color: #d32f2f;">Nothing SMP</h1>
+                <p class="lead small-text">A Lightly Modded Minecraft Survival Multiplayer Server</p>
+                <a href="#contact" class="btn btn-lg btn-discord">Join Us</a>
+            </div>
+        </section>
 
-    <!-- Staff Section -->
-    <section id="staff" class="section" data-aos="fade-up">
-        <div class="container">
-            <h2 class="text-center minecraft-font mb-5" style="color: #d32f2f;">Meet the Staff</h2>
-            <div class="row justify-content-center">
-                <div class="col-md-4 mb-4">
-                    <div class="card staff-card">
-                        <img src="assets/images/owner.jpg" class="card-img-top" alt="Owner">
-                        <div class="card-body text-center">
-                            <h5 class="card-title minecraft-font" style="color: #d32f2f;">Owner: [Your Username]</h5>
-                            <p class="card-text small-text">Founder and administrator of Nothing SMP.</p>
+        <!-- About Section -->
+        <section id="about" class="section parallax" style="background-image: url('assets/images/about-bg.jpg');" data-aos="fade-up">
+            <div class="container">
+                <h2 class="minecraft-font mb-5" style="color: #d32f2f;">About Nothing SMP</h2>
+                <p class="text-center small-text">Nothing SMP is a lightly modded Survival Multiplayer server where players can build, explore, and thrive in a friendly community. With fair play as our core, fights occur only for valid reasons. Enjoy custom mods, an economy system, regular events, and more with our 20 dedicated players!</p>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="section" data-aos="fade-up">
+            <div class="container">
+                <h2 class="text-center minecraft-font mb-5" style="color: #d32f2f;">Server Features</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="card feature-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Lightly Modded</h5>
+                                <p class="card-text small-text">Vanilla-like gameplay with quality-of-life mods for an enhanced experience.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card staff-card">
-                        <img src="assets/images/helper1.jpg" class="card-img-top" alt="Helper">
-                        <div class="card-body text-center">
-                            <h5 class="card-title minecraft-font" style="color: #d32f2f;">Helper: [Helper1 Username]</h5>
-                            <p class="card-text small-text">Assists with moderation and events.</p>
+                    <div class="col-md-4 mb-4">
+                        <div class="card feature-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Fair PvP</h5>
+                                <p class="card-text small-text">Fights only for valid reasons—no griefing or random attacks.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card staff-card">
-                        <img src="assets/images/helper2.jpg" class="card-img-top" alt="Helper">
-                        <div class="card-body text-center">
-                            <h5 class="card-title minecraft-font" style="color: #d32f2f;">Helper: [Helper2 Username]</h5>
-                            <p class="card-text small-text">Helps new players and maintains server rules.</p>
+                    <div class="col-md-4 mb-4">
+                        <div class="card feature-card">
+                            <div class="card-body text-center">
+                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Economy & Events</h5>
+                                <p class="card-text small-text">Player-driven economy with weekly events and custom builds.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section" data-aos="fade-up">
-        <div class="container text-center">
-            <h2 class="minecraft-font mb-5" style="color: #d32f2f;">Contact & Support</h2>
-            <p class="small-text">Join our Discord for support, updates, and community chats!</p>
-            <p class="small-text">Server IP: [Your Server IP]</p>
-            <a href="https://discord.gg/your-discord-invite-link" class="btn btn-lg btn-discord">Join Discord</a>
-        </div>
-    </section>
+        <!-- Players Section -->
+        <section id="players" class="section parallax" style="background-image: url('assets/images/players-bg.jpg');" data-aos="fade-up">
+            <div class="container">
+                <h2 class="text-center minecraft-font mb-5" style="color: #d32f2f;">Our Players</h2>
+                <p class="text-center small-text">Join our vibrant community of 20 active players collaborating on massive builds, trading resources, and enjoying server events!</p>
+            </div>
+        </section>
 
-    <!-- Footer -->
-    <footer class="bg-black py-4 text-center" style="border-top: 2px solid #d32f2f;">
-        <p class="small-text">&copy; 2025 Nothing SMP. All rights reserved.</p>
-    </footer>
+        <!-- Staff Section -->
+        <section id="staff" class="section" data-aos="fade-up">
+            <div class="container">
+                <h2 class="text-center minecraft-font mb-5" style="color: #d32f2f;">Meet the Staff</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-4 mb-4">
+                        <div class="card staff-card">
+                            <img src="assets/images/owner.jpg" class="card-img-top" alt="Owner">
+                            <div class="card-body text-center">
+                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Owner: [Your Username]</h5>
+                                <p class="card-text small-text">Founder and administrator of Nothing SMP.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card staff-card">
+                            <img src="assets/images/helper1.jpg" class="card-img-top" alt="Helper">
+                            <div class="card-body text-center">
+                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Helper: [Helper1 Username]</h5>
+                                <p class="card-text small-text">Assists with moderation and events.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="card staff-card">
+                            <img src="assets/images/helper2.jpg" class="card-img-top" alt="Helper">
+                            <div class="card-body text-center">
+                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Helper: [Helper2 Username]</h5>
+                                <p class="card-text small-text">Helps new players and maintains server rules.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section" data-aos="fade-up">
+            <div class="container text-center">
+                <h2 class="minecraft-font mb-5" style="color: #d32f2f;">Contact & Support</h2>
+                <p class="small-text">Join our Discord for support, updates, and community chats!</p>
+                <p class="small-text">Server IP: [Your Server IP]</p>
+                <a href="https://discord.gg/your-discord-invite-link" class="btn btn-lg btn-discord">Join Discord</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-black py-4 text-center" style="border-top: 2px solid #d32f2f;">
+            <p class="small-text">&copy; 2025 Nothing SMP. All rights reserved.</p>
+        </footer>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Simulate site load and trigger loading screen
-        window.addEventListener('load', () => {
-            // Hide main content briefly
-            document.body.style.opacity = '0';
-            setTimeout(() => {
-                // Show loading screen
-                document.getElementById('loading-screen').style.display = 'flex';
-                // Fade in loading screen
-                setTimeout(() => {
-                    document.getElementById('loading-screen').style.opacity = '1';
-                    // After 3 seconds, show play button and fade out loading screen
-                    setTimeout(() => {
-                        document.getElementById('loading-screen').style.opacity = '0';
-                        setTimeout(() => {
-                            document.getElementById('loading-screen').style.display = 'none';
-                            document.getElementById('play-button').style.display = 'block';
-                            // Fade in main content
-                            document.body.style.opacity = '1';
-                            AOS.init({
-                                duration: 1200,
-                                easing: 'ease-in-out',
-                                once: true
-                            });
-                        }, 1000); // Fade out duration
-                    }, 3000); // Loading screen duration
-                }, 100); // Slight delay for smooth transition
-            }, 500); // Allow initial load to settle
-        });
-
-        // Play button click to scroll to home
+        // Play button click to show loading screen and transition to home
         document.getElementById('play-button').addEventListener('click', () => {
-            document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
-            document.getElementById('play-button').style.display = 'none';
+            document.getElementById('initial-screen').style.display = 'none';
+            document.getElementById('loading-screen').style.display = 'flex';
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading-screen').style.display = 'none';
+                    document.getElementById('main-content').style.display = 'block';
+                    AOS.init({
+                        duration: 1200,
+                        easing: 'ease-in-out',
+                        once: true
+                    });
+                    document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+                }, 1000); // Fade out duration
+            }, 3000); // Loading screen duration
         });
 
         // Floating Particles Config
@@ -405,4 +409,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
