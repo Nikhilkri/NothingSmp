@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nothing SMP - Lightly Modded Minecraft Survival Server</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Pixel Font for Minecraft Touch -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- AOS for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .minecraft-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.5; /* Subtle particles */
+        }
+        .hero {
+            background-image: url('https://via.placeholder.com/1920x1080?text=Minecraft+World'); /* Replace with your Minecraft world image */
+            background-attachment: fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .navbar {
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background-color: #1a1a1a !important;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        .section {
+            padding: 80px 0;
+        }
+        .feature-card, .staff-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover, .staff-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); /* Green glow for Minecraft touch */
+        }
+        .btn-discord {
+            background-color: #5865F2;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .btn-discord:hover {
+            background-color: #404eed;
+        }
+        /* Parallax effect for sections */
+        .parallax {
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 2s ease-in;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top">
+        <div class="container">
+            <a class="navbar-brand minecraft-font" href="#">Nothing SMP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#players">Players</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#staff">Staff</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero animate-fadeIn">
+        <div class="container position-relative">
+            <h1 class="display-1 minecraft-font text-success">Nothing SMP</h1>
+            <p class="lead">A Lightly Modded Minecraft Survival Multiplayer Server</p>
+            <a href="#contact" class="btn btn-lg btn-success">Join Us</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section bg-dark parallax" style="background-image: url('https://via.placeholder.com/1920x600?text=About+Background');" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-center minecraft-font mb-5">About Nothing SMP</h2>
+            <p class="text-center">Nothing SMP is a lightly modded Survival Multiplayer server where players can build, explore, and interact in a friendly environment. With a focus on fair play, fights only occur for valid reasons, promoting a positive community. Our server features custom mods for enhanced gameplay, economy systems, regular events, and more. Join our 20 dedicated players in this blocky adventure!</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section bg-secondary" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-center minecraft-font mb-5">Server Features</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark feature-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Lightly Modded</h5>
+                            <p class="card-text">Enjoy vanilla-like gameplay with quality-of-life mods for better experience.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark feature-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Fair PvP</h5>
+                            <p class="card-text">Players only fight for reasons – no griefing or random attacks.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark feature-card">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Economy & Events</h5>
+                            <p class="card-text">Player-driven economy, weekly events, and custom builds.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more features as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Players Section -->
+    <section id="players" class="section bg-dark parallax" style="background-image: url('https://via.placeholder.com/1920x600?text=Players+Background');" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-center minecraft-font mb-5">Our Players</h2>
+            <p class="text-center">We have a vibrant community of 20 active players who collaborate on massive builds, trade resources, and participate in server events. Join us to become part of this growing family!</p>
+            <!-- You can add a player list or stats here if available -->
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section id="staff" class="section bg-secondary" data-aos="fade-up">
+        <div class="container">
+            <h2 class="text-center minecraft-font mb-5">Meet the Staff</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark staff-card">
+                        <img src="https://via.placeholder.com/300x300?text=Owner" class="card-img-top" alt="Owner">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Owner: [Your Username]</h5>
+                            <p class="card-text">Founder and administrator of Nothing SMP.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark staff-card">
+                        <img src="https://via.placeholder.com/300x300?text=Helper1" class="card-img-top" alt="Helper">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Helper: [Helper1 Username]</h5>
+                            <p class="card-text">Assists with moderation and events.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card bg-dark staff-card">
+                        <img src="https://via.placeholder.com/300x300?text=Helper2" class="card-img-top" alt="Helper">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Helper: [Helper2 Username]</h5>
+                            <p class="card-text">Helps new players and maintains server rules.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more staff as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-dark" data-aos="fade-up">
+        <div class="container text-center">
+            <h2 class="minecraft-font mb-5">Contact & Support</h2>
+            <p>Join our Discord for support, updates, and community chats!</p>
+            <a href="https://discord.gg/your-discord-invite-link" class="btn btn-lg btn-discord">Join Discord</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-4 text-center">
+        <p>&copy; 2025 Nothing SMP. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // Particles Config - Subtle Minecraft-like particles (e.g., dust or experience orbs)
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00ff00" }, // Green for Minecraft touch
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": false },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
+                "modes": { "repulse": { "distance": 100 }, "push": { "particles_nb": 4 } }
+            },
+            "retina_detect": true
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
