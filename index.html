@@ -21,6 +21,11 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            transition: all 0.3s ease-in-out; /* Smooth transitions */
+            user-select: none; /* Prevent text selection */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE/Edge */
         }
         #main-content {
             width: 100%;
@@ -32,6 +37,7 @@
             letter-spacing: 1px;
             line-height: 1.4;
             color: #ff0000; /* Red text color */
+            transition: all 0.3s ease-in-out; /* Smooth text transitions */
         }
         .small-text {
             color: #ffffff;
@@ -39,6 +45,7 @@
             font-size: 1rem;
             line-height: 1.6;
             word-wrap: break-word;
+            transition: all 0.3s ease-in-out; /* Smooth text transitions */
         }
         @media (max-width: 768px) {
             .minecraft-font { font-size: 0.9rem; letter-spacing: 2px; }
@@ -63,11 +70,11 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            transition: background-color 0.5s ease;
+            transition: all 0.5s ease-in-out; /* Smooth hero transition */
         }
         .navbar {
             background-color: rgba(0, 0, 0, 0.9);
-            transition: all 0.4s ease;
+            transition: all 0.4s ease-in-out; /* Smoother navbar transition */
             border-bottom: 2px solid #ff0000; /* Red border */
         }
         .navbar.scrolled {
@@ -76,7 +83,7 @@
         }
         .nav-link {
             color: #ffffff;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease-in-out; /* Smooth nav link transition */
         }
         .nav-link:hover {
             color: #ff0000;
@@ -85,13 +92,13 @@
         .section {
             padding: 80px 0;
             background: #ffebee; /* Light red background */
-            transition: background 0.5s ease;
+            transition: all 0.5s ease-in-out; /* Smooth section transition */
         }
         .feature-card, .staff-card {
             background-color: rgba(0, 0, 0, 0.7);
             border: 2px solid #ff0000;
             border-radius: 8px;
-            transition: all 0.4s ease;
+            transition: all 0.4s ease-in-out; /* Smoother card transition */
             box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
         }
         .feature-card:hover, .staff-card:hover {
@@ -103,7 +110,7 @@
             border: none;
             color: #ffffff;
             padding: 10px 20px;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease-in-out; /* Smoother button transition */
         }
         .btn-discord:hover {
             background-color: #cc0000;
@@ -114,6 +121,7 @@
             background-attachment: fixed;
             background-size: cover;
             background-color: rgba(0, 0, 0, 0.5);
+            transition: all 0.5s ease-in-out; /* Smooth parallax transition */
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
@@ -126,6 +134,7 @@
             height: 200px;
             object-fit: cover;
             border-bottom: 2px solid #ff0000;
+            transition: all 0.3s ease-in-out; /* Smooth image transition */
         }
         .card-body {
             padding: 1.5rem;
@@ -138,10 +147,10 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;" onselectstart="return false;">
     <!-- Main Content -->
     <div id="main-content">
-        <!-- Floating Particles Background -->
+        <!-- Falling Particles Background -->
         <div id="particles-js"></div>
 
         <!-- Navbar -->
@@ -278,23 +287,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Floating Particles Config
+        // Falling Particles Config for Smooth Effect
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 25, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#ff0000" },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.3, "random": true },
-                "size": { "value": 3, "random": true },
+                "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                "size": { "value": 5, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false } },
                 "line_linked": { "enable": false },
                 "move": {
                     "enable": true,
-                    "speed": 1,
-                    "direction": "none",
-                    "random": true,
+                    "speed": 2,
+                    "direction": "bottom", // Falling downward
+                    "random": false,
                     "straight": false,
                     "out_mode": "out",
-                    "bounce": false
+                    "bounce": false,
+                    "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 }
                 }
             },
             "interactivity": {
@@ -314,11 +324,22 @@
             }
         });
 
-        // AOS Initialization
+        // AOS Initialization with Smooth Easing
         AOS.init({
             duration: 1200,
             easing: 'ease-in-out',
-            once: true
+            once: true,
+            offset: 100
+        });
+
+        // Disable right-click
+        document.addEventListener('contextmenu', (event) => {
+            event.preventDefault();
+        });
+
+        // Prevent text selection (additional layer)
+        document.addEventListener('selectstart', (event) => {
+            event.preventDefault();
         });
     </script>
 </body>
