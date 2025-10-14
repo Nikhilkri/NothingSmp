@@ -15,12 +15,30 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #0a0a0a;
+            background-color: #000000;
             color: #ffffff;
             overflow-x: hidden;
+            line-height: 1.6; /* Improved readability */
         }
         .minecraft-font {
             font-family: 'Press Start 2P', cursive;
+            text-shadow: 2px 2px 0px #000; /* Subtle shadow for better visibility */
+            letter-spacing: 1px; /* Prevent overlap on mobile */
+            line-height: 1.2; /* Adjust for pixel font */
+            font-size: 1.2rem; /* Base size, scales better */
+        }
+        .minecraft-font h1, .minecraft-font h2, .minecraft-font h5 {
+            font-size: 1.5rem; /* Responsive sizing */
+            text-transform: uppercase;
+        }
+        @media (max-width: 768px) {
+            .minecraft-font {
+                font-size: 0.9rem;
+                letter-spacing: 2px; /* Extra spacing on mobile to avoid overlap */
+            }
+            .minecraft-font h1, .minecraft-font h2 {
+                font-size: 1.2rem;
+            }
         }
         #particles-js {
             position: absolute;
@@ -29,10 +47,10 @@
             top: 0;
             left: 0;
             z-index: -1;
-            opacity: 0.5; /* Subtle particles */
+            opacity: 0.3; /* Subtle particles */
         }
         .hero {
-            background-image: url('https://via.placeholder.com/1920x1080?text=Minecraft+World'); /* Replace with your Minecraft world image */
+            background-image: url('assets/images/hero.jpg'); /* Replace with your image */
             background-attachment: fixed;
             background-size: cover;
             height: 100vh;
@@ -49,32 +67,47 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6); /* Darker overlay for red/black theme */
         }
         .navbar {
-            transition: all 0.3s ease;
+            transition: all 0.4s ease; /* Smoother transition */
+            background-color: rgba(0, 0, 0, 0.8);
         }
         .navbar.scrolled {
-            background-color: #1a1a1a !important;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            background-color: #000000 !important;
+            box-shadow: 0 4px 12px rgba(139, 0, 0, 0.5); /* Red glow shadow */
+        }
+        .nav-link {
+            transition: all 0.3s ease; /* Smooth hover */
+        }
+        .nav-link:hover {
+            color: #ff0000 !important; /* Red on hover */
+            text-shadow: 0 0 10px #ff0000; /* Red glow */
         }
         .section {
             padding: 80px 0;
         }
         .feature-card, .staff-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #111111;
+            border: 1px solid #330000; /* Dark red border */
+            transition: all 0.4s ease; /* Smoother transition */
+            box-shadow: 0 0 10px rgba(139, 0, 0, 0.3); /* Subtle red glow */
         }
         .feature-card:hover, .staff-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5); /* Green glow for Minecraft touch */
+            transform: scale(1.05) translateY(-5px); /* Lift effect */
+            box-shadow: 0 10px 30px rgba(139, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.5); /* Intense red glow */
+            border-color: #ff0000;
         }
         .btn-discord {
-            background-color: #5865F2;
+            background-color: #8B0000; /* Dark red */
             border: none;
-            transition: background-color 0.3s;
+            color: #ffffff;
+            transition: all 0.3s ease;
         }
         .btn-discord:hover {
-            background-color: #404eed;
+            background-color: #ff0000; /* Bright red */
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.6); /* Red glow */
+            transform: translateY(-2px);
         }
         /* Parallax effect for sections */
         .parallax {
@@ -83,22 +116,37 @@
         }
         /* Animation Keyframes */
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .animate-fadeIn {
-            animation: fadeIn 2s ease-in;
+            animation: fadeIn 1.5s ease-out; /* Smoother fade-in */
+        }
+        .text-red-glow {
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; /* Red glow text */
+        }
+        .card-body {
+            padding: 1.5rem; /* Better spacing */
+        }
+        .card-text {
+            font-size: 1rem; /* Ensure readability */
+            word-wrap: break-word; /* Prevent overflow */
+        }
+        /* Fix for mobile text issues */
+        p, .card-text {
+            word-spacing: 1px; /* Prevent letter overlap */
         }
     </style>
 </head>
 <body>
-    <!-- Particles Background -->
+    <!-- Particles Background - Red theme -->
     <div id="particles-js"></div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand minecraft-font" href="#">Nothing SMP</a>
+            <a class="navbar-brand minecraft-font text-red-glow" href="#">Nothing SMP</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -118,111 +166,108 @@
     <!-- Hero Section -->
     <section id="home" class="hero animate-fadeIn">
         <div class="container position-relative">
-            <h1 class="display-1 minecraft-font text-success">Nothing SMP</h1>
+            <h1 class="display-1 minecraft-font text-red-glow">Nothing SMP</h1>
             <p class="lead">A Lightly Modded Minecraft Survival Multiplayer Server</p>
-            <a href="#contact" class="btn btn-lg btn-success">Join Us</a>
+            <a href="#contact" class="btn btn-lg btn-discord">Join Us</a>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section bg-dark parallax" style="background-image: url('https://via.placeholder.com/1920x600?text=About+Background');" data-aos="fade-up">
+    <section id="about" class="section bg-secondary parallax" style="background-image: url('assets/images/about-bg.jpg');" data-aos="fade-up">
         <div class="container">
-            <h2 class="text-center minecraft-font mb-5">About Nothing SMP</h2>
+            <h2 class="text-center minecraft-font mb-5 text-red-glow">About Nothing SMP</h2>
             <p class="text-center">Nothing SMP is a lightly modded Survival Multiplayer server where players can build, explore, and interact in a friendly environment. With a focus on fair play, fights only occur for valid reasons, promoting a positive community. Our server features custom mods for enhanced gameplay, economy systems, regular events, and more. Join our 20 dedicated players in this blocky adventure!</p>
         </div>
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="section bg-secondary" data-aos="fade-up">
+    <section id="features" class="section" style="background-color: #111111;" data-aos="fade-up">
         <div class="container">
-            <h2 class="text-center minecraft-font mb-5">Server Features</h2>
+            <h2 class="text-center minecraft-font mb-5 text-red-glow">Server Features</h2>
             <div class="row">
                 <div class="col-md-4 mb-4">
-                    <div class="card bg-dark feature-card">
+                    <div class="card feature-card">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Lightly Modded</h5>
+                            <h5 class="card-title minecraft-font">Lightly Modded</h5>
                             <p class="card-text">Enjoy vanilla-like gameplay with quality-of-life mods for better experience.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card bg-dark feature-card">
+                    <div class="card feature-card">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Fair PvP</h5>
+                            <h5 class="card-title minecraft-font">Fair PvP</h5>
                             <p class="card-text">Players only fight for reasons – no griefing or random attacks.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card bg-dark feature-card">
+                    <div class="card feature-card">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Economy & Events</h5>
+                            <h5 class="card-title minecraft-font">Economy & Events</h5>
                             <p class="card-text">Player-driven economy, weekly events, and custom builds.</p>
                         </div>
                     </div>
                 </div>
-                <!-- Add more features as needed -->
             </div>
         </div>
     </section>
 
     <!-- Players Section -->
-    <section id="players" class="section bg-dark parallax" style="background-image: url('https://via.placeholder.com/1920x600?text=Players+Background');" data-aos="fade-up">
+    <section id="players" class="section parallax" style="background-image: url('assets/images/players-bg.jpg'); background-color: rgba(0,0,0,0.7);" data-aos="fade-up">
         <div class="container">
-            <h2 class="text-center minecraft-font mb-5">Our Players</h2>
+            <h2 class="text-center minecraft-font mb-5 text-red-glow">Our Players</h2>
             <p class="text-center">We have a vibrant community of 20 active players who collaborate on massive builds, trade resources, and participate in server events. Join us to become part of this growing family!</p>
-            <!-- You can add a player list or stats here if available -->
         </div>
     </section>
 
     <!-- Staff Section -->
-    <section id="staff" class="section bg-secondary" data-aos="fade-up">
+    <section id="staff" class="section" style="background-color: #111111;" data-aos="fade-up">
         <div class="container">
-            <h2 class="text-center minecraft-font mb-5">Meet the Staff</h2>
+            <h2 class="text-center minecraft-font mb-5 text-red-glow">Meet the Staff</h2>
             <div class="row justify-content-center">
                 <div class="col-md-4 mb-4">
-                    <div class="card bg-dark staff-card">
-                        <img src="https://via.placeholder.com/300x300?text=Owner" class="card-img-top" alt="Owner">
+                    <div class="card staff-card">
+                        <img src="assets/images/owner.jpg" class="card-img-top" alt="Owner">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Owner: [Your Username]</h5>
+                            <h5 class="card-title minecraft-font">Owner: [Your Username]</h5>
                             <p class="card-text">Founder and administrator of Nothing SMP.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card bg-dark staff-card">
-                        <img src="https://via.placeholder.com/300x300?text=Helper1" class="card-img-top" alt="Helper">
+                    <div class="card staff-card">
+                        <img src="assets/images/helper1.jpg" class="card-img-top" alt="Helper">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Helper: [Helper1 Username]</h5>
+                            <h5 class="card-title minecraft-font">Helper: [Helper1 Username]</h5>
                             <p class="card-text">Assists with moderation and events.</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
-                    <div class="card bg-dark staff-card">
-                        <img src="https://via.placeholder.com/300x300?text=Helper2" class="card-img-top" alt="Helper">
+                    <div class="card staff-card">
+                        <img src="assets/images/helper2.jpg" class="card-img-top" alt="Helper">
                         <div class="card-body text-center">
-                            <h5 class="card-title">Helper: [Helper2 Username]</h5>
+                            <h5 class="card-title minecraft-font">Helper: [Helper2 Username]</h5>
                             <p class="card-text">Helps new players and maintains server rules.</p>
                         </div>
                     </div>
                 </div>
-                <!-- Add more staff as needed -->
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section bg-dark" data-aos="fade-up">
+    <section id="contact" class="section" style="background-color: #000000;" data-aos="fade-up">
         <div class="container text-center">
-            <h2 class="minecraft-font mb-5">Contact & Support</h2>
+            <h2 class="minecraft-font mb-5 text-red-glow">Contact & Support</h2>
             <p>Join our Discord for support, updates, and community chats!</p>
             <a href="https://discord.gg/your-discord-invite-link" class="btn btn-lg btn-discord">Join Discord</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black py-4 text-center">
+    <footer class="bg-black py-4 text-center" style="background-color: #000000; border-top: 1px solid #330000;">
         <p>&copy; 2025 Nothing SMP. All rights reserved.</p>
     </footer>
 
@@ -230,35 +275,183 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init();
+        AOS.init({
+            duration: 1000, // Smoother animations
+            easing: 'ease-out-cubic'
+        });
 
-        // Particles Config - Subtle Minecraft-like particles (e.g., dust or experience orbs)
+        // Particles Config - Red particles for theme
         particlesJS('particles-js', {
             "particles": {
                 "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#00ff00" }, // Green for Minecraft touch
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": false },
-                "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
-            },
-            "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
-                "modes": { "repulse": { "distance": 100 }, "push": { "particles_nb": 4 } }
-            },
-            "retina_detect": true
-        });
+                "color": { "value": "#ff0000" }, // Red particles
+                "shape": { The user is referring to the previous conversation about the Minecraft server website. They shared screenshots showing bugs like text not displaying properly, duplicated words, and layout issues on mobile. They said: "there are many bugs and issue there like word not see and etc so make the theme in red and black with glow and better smooth transition on interactions"
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+Then, I generated an image based on that prompt, but the user says: "I edited the image with the prompt: 'there are many bugs and issue there like word not see and etc so make the theme in red and black with glow and better smooth transition on interactions'"
+
+Now, the current message: "i mean i need the new fixed cords not generated image make what i asked and make it professional"
+
+They want the new fixed HTML/CSS code, not a generated image. They want me to fix the bugs in the code, change the theme to red and black with glow effects, better smooth transitions on interactions, and make it professional.
+
+Key issues from screenshots:
+- Duplicated text like "SMP SMP", "Featuresures", "Playersers"
+- Text overlapping or not visible.
+- Cards are empty or broken.
+- Layout issues on mobile.
+
+I need to provide an updated HTML file with fixes:
+- Fix text errors (remove duplicates).
+- Change theme to red and black (e.g., background black, accents red, glow in red).
+- Add glow effects (box-shadow with red).
+- Smooth transitions (transition: all 0.3s ease; on hovers).
+- Ensure mobile responsiveness.
+- Keep Minecraft touch with pixel font.
+- Particles: Change to red color.
+
+Since it's HTML, I'll output the full updated code.
+
+No tools needed, as this is code generation based on previous context.
+
+Final response: The updated HTML code.```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nothing SMP - Lightly Modded Minecraft Survival Server</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Pixel Font for Minecraft Touch -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- AOS for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000; /* Black background */
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .minecraft-font {
+            font-family: 'Press Start 2P', cursive;
+            text-shadow: 2px 2px 0px #8B0000; /* Red glow shadow */
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.6; /* Subtle particles */
+        }
+        .hero {
+            background-image: url('assets/images/hero.jpg'); /* Replace with your image */
+            background-attachment: fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Dark overlay for readability */
+        }
+        .navbar {
+            background-color: #000000 !important;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid #8B0000; /* Red border */
+        }
+        .navbar.scrolled {
+            box-shadow: 0 4px 8px rgba(139, 0, 0, 0.5); /* Red glow shadow */
+        }
+        .section {
+            padding: 80px 0;
+        }
+        .feature-card, .staff-card {
+            background-color: #111111; /* Dark gray-black */
+            border: 1px solid #8B0000; /* Red border */
+            transition: all 0.4s ease; /* Smooth transition */
+        }
+        .feature-card:hover, .staff-card:hover {
+            transform: scale(1.05) translateY(-5px); /* Smooth lift on hover */
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.8); /* Enhanced red glow */
+        }
+        .btn-discord {
+            background-color: #8B0000; /* Red button */
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-discord:hover {
+            background-color: #A52A2A; /* Darker red */
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.6); /* Red glow on hover */
+        }
+        .parallax {
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        /* Fix text issues: Ensure proper spacing and no duplicates */
+        .card-text, p {
+            line-height: 1.6; /* Better readability */
+            word-wrap: break-word; /* Prevent overflow */
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Mobile fixes: Better text sizing and spacing */
+        @media (max-width: 768px) {
+            .minecraft-font {
+                font-size: 0.8rem; /* Smaller font on mobile */
             }
-        });
-    </script>
-</body>
-</html>
+            .lead {
+                font-size: 1rem;
+            }
+            .display-1 {
+                font-size: 2rem;
+            }
+            .section {
+                padding: 40px 0;
+            }
+        }
+        /* Animation Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 1.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background - Red particles for new theme -->
+    <div id="particles-js"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand minecraft-font" href="#">Nothing SMP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"
