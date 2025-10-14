@@ -15,7 +15,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ffebee, #f44336); /* Light red to medium red gradient */
+            background: linear-gradient(135deg, #9c27b0, #673ab7); /* Violet to purple gradient */
             color: #ffffff;
             overflow-x: hidden;
             margin: 0;
@@ -32,7 +32,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #ffebee, #f44336);
+            background: linear-gradient(135deg, #9c27b0, #673ab7);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -69,19 +69,21 @@
             opacity: 1;
             transition: opacity 1s ease-in-out;
         }
-        #loading-bar {
-            width: 300px;
-            height: 20px;
-            background: #000000;
+        #loading-bar-container {
+            width: 400px;
+            height: 30px;
+            background: #333333;
             border: 2px solid #ffffff;
+            border-radius: 5px;
             overflow: hidden;
             position: relative;
         }
         #loading-bar-fill {
             width: 0;
             height: 100%;
-            background: #00ff00; /* Green fill like Minecraft */
-            animation: load 3s linear forwards;
+            background: linear-gradient(90deg, #4caf50, #8bc34a); /* Green to light green gradient */
+            animation: load 3s ease-out forwards;
+            box-shadow: 0 0 10px #4caf50;
         }
         @keyframes load {
             0% { width: 0; }
@@ -94,13 +96,13 @@
         }
         .minecraft-font {
             font-family: 'Press Start 2P', cursive;
-            text-shadow: 0 0 5px #d32f2f, 0 0 10px #d32f2f;
+            text-shadow: 0 0 5px #ab47bc, 0 0 10px #ab47bc; /* Purple glow for headings */
             letter-spacing: 1px;
             line-height: 1.4;
         }
         .small-text {
             color: #ffffff;
-            text-shadow: 0 0 3px #d32f2f, 0 0 6px #d32f2f;
+            text-shadow: 0 0 3px #ab47bc, 0 0 6px #ab47bc; /* Subtle purple glow for small text */
             font-size: 1rem;
             line-height: 1.6;
             word-wrap: break-word;
@@ -109,6 +111,7 @@
             .minecraft-font { font-size: 0.9rem; letter-spacing: 2px; }
             .small-text { font-size: 0.9rem; }
             #play-button { width: 150px; height: 150px; }
+            #loading-bar-container { width: 250px; height: 20px; }
         }
         #particles-js {
             position: fixed;
@@ -134,46 +137,46 @@
         .navbar {
             background-color: rgba(0, 0, 0, 0.9);
             transition: all 0.4s ease;
-            border-bottom: 2px solid #d32f2f;
+            border-bottom: 2px solid #ab47bc; /* Purple border */
         }
         .navbar.scrolled {
-            background-color: #ffebee !important;
-            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.6);
+            background-color: #9c27b0 !important;
+            box-shadow: 0 4px 15px rgba(171, 71, 188, 0.6); /* Purple glow shadow */
         }
         .nav-link {
             color: #ffffff;
             transition: all 0.3s ease;
         }
         .nav-link:hover {
-            color: #d32f2f;
-            text-shadow: 0 0 10px #d32f2f;
+            color: #ab47bc;
+            text-shadow: 0 0 10px #ab47bc;
         }
         .section {
             padding: 80px 0;
-            background: linear-gradient(135deg, #ffebee, #f44336);
+            background: linear-gradient(135deg, #9c27b0, #673ab7);
             transition: background 0.5s ease;
         }
         .feature-card, .staff-card {
             background-color: rgba(0, 0, 0, 0.7);
-            border: 2px solid #d32f2f;
+            border: 2px solid #ab47bc;
             border-radius: 8px;
             transition: all 0.4s ease;
-            box-shadow: 0 0 10px rgba(211, 47, 47, 0.3);
+            box-shadow: 0 0 10px rgba(171, 71, 188, 0.3);
         }
         .feature-card:hover, .staff-card:hover {
             transform: scale(1.05) translateY(-10px);
-            box-shadow: 0 10px 30px rgba(211, 47, 47, 0.8), 0 0 20px rgba(211, 47, 47, 0.5);
+            box-shadow: 0 10px 30px rgba(171, 71, 188, 0.8), 0 0 20px rgba(171, 71, 188, 0.5);
         }
         .btn-discord {
-            background-color: #d32f2f;
+            background-color: #ab47bc;
             border: none;
             color: #ffffff;
             padding: 10px 20px;
             transition: all 0.3s ease;
         }
         .btn-discord:hover {
-            background-color: #b71c1c;
-            box-shadow: 0 0 20px rgba(211, 47, 47, 0.7);
+            background-color: #8e24aa;
+            box-shadow: 0 0 20px rgba(171, 71, 188, 0.7);
             transform: translateY(-3px);
         }
         .parallax {
@@ -191,7 +194,7 @@
         .card-img-top {
             height: 200px;
             object-fit: cover;
-            border-bottom: 2px solid #d32f2f;
+            border-bottom: 2px solid #ab47bc;
         }
         .card-body {
             padding: 1.5rem;
@@ -210,9 +213,9 @@
         <button id="play-button"></button>
     </div>
 
-    <!-- Minecraft Loading Screen with Bar -->
+    <!-- Minecraft Loading Screen with Improved Bar -->
     <div id="loading-screen">
-        <div id="loading-bar">
+        <div id="loading-bar-container">
             <div id="loading-bar-fill"></div>
         </div>
     </div>
@@ -225,7 +228,7 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand minecraft-font" href="#" style="color: #d32f2f;">Nothing SMP</a>
+                <a class="navbar-brand minecraft-font" href="#" style="color: #ab47bc;">Nothing SMP</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -245,7 +248,7 @@
         <!-- Hero Section -->
         <section id="home" class="hero animate-fadeIn">
             <div class="container position-relative">
-                <h1 class="display-1 minecraft-font" style="color: #d32f2f;">Nothing SMP</h1>
+                <h1 class="display-1 minecraft-font" style="color: #ab47bc;">Nothing SMP</h1>
                 <p class="lead small-text">A Lightly Modded Minecraft Survival Multiplayer Server</p>
                 <a href="#contact" class="btn btn-lg btn-discord">Join Us</a>
             </div>
@@ -254,7 +257,7 @@
         <!-- About Section -->
         <section id="about" class="section parallax" style="background-image: url('assets/images/about-bg.jpg');" data-aos="fade-up">
             <div class="container">
-                <h2 class="minecraft-font mb-5" style="color: #d32f2f;">About Nothing SMP</h2>
+                <h2 class="minecraft-font mb-5" style="color: #ab47bc;">About Nothing SMP</h2>
                 <p class="text-center small-text">Nothing SMP is a lightly modded Survival Multiplayer server where players can build, explore, and thrive in a friendly community. With fair play as our core, fights occur only for valid reasons. Enjoy custom mods, an economy system, regular events, and more with our 20 dedicated players!</p>
             </div>
         </section>
@@ -262,12 +265,12 @@
         <!-- Features Section -->
         <section id="features" class="section" data-aos="fade-up">
             <div class="container">
-                <h2 class="text-center minecraft-font mb-5" style="color: #d32f2f;">Server Features</h2>
+                <h2 class="text-center minecraft-font mb-5" style="color: #ab47bc;">Server Features</h2>
                 <div class="row">
                     <div class="col-md-4 mb-4">
                         <div class="card feature-card">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Lightly Modded</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Lightly Modded</h5>
                                 <p class="card-text small-text">Vanilla-like gameplay with quality-of-life mods for an enhanced experience.</p>
                             </div>
                         </div>
@@ -275,7 +278,7 @@
                     <div class="col-md-4 mb-4">
                         <div class="card feature-card">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Fair PvP</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Fair PvP</h5>
                                 <p class="card-text small-text">Fights only for valid reasons—no griefing or random attacks.</p>
                             </div>
                         </div>
@@ -283,7 +286,7 @@
                     <div class="col-md-4 mb-4">
                         <div class="card feature-card">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Economy & Events</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Economy & Events</h5>
                                 <p class="card-text small-text">Player-driven economy with weekly events and custom builds.</p>
                             </div>
                         </div>
@@ -295,7 +298,7 @@
         <!-- Players Section -->
         <section id="players" class="section parallax" style="background-image: url('assets/images/players-bg.jpg');" data-aos="fade-up">
             <div class="container">
-                <h2 class="text-center minecraft-font mb-5" style="color: #d32f2f;">Our Players</h2>
+                <h2 class="text-center minecraft-font mb-5" style="color: #ab47bc;">Our Players</h2>
                 <p class="text-center small-text">Join our vibrant community of 20 active players collaborating on massive builds, trading resources, and enjoying server events!</p>
             </div>
         </section>
@@ -303,13 +306,13 @@
         <!-- Staff Section -->
         <section id="staff" class="section" data-aos="fade-up">
             <div class="container">
-                <h2 class="text-center minecraft-font mb-5" style="color: #d32f2f;">Meet the Staff</h2>
+                <h2 class="text-center minecraft-font mb-5" style="color: #ab47bc;">Meet the Staff</h2>
                 <div class="row justify-content-center">
                     <div class="col-md-4 mb-4">
                         <div class="card staff-card">
                             <img src="assets/images/owner.jpg" class="card-img-top" alt="Owner">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Owner: [Your Username]</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Owner: [Your Username]</h5>
                                 <p class="card-text small-text">Founder and administrator of Nothing SMP.</p>
                             </div>
                         </div>
@@ -318,7 +321,7 @@
                         <div class="card staff-card">
                             <img src="assets/images/helper1.jpg" class="card-img-top" alt="Helper">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Helper: [Helper1 Username]</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Helper: [Helper1 Username]</h5>
                                 <p class="card-text small-text">Assists with moderation and events.</p>
                             </div>
                         </div>
@@ -327,7 +330,7 @@
                         <div class="card staff-card">
                             <img src="assets/images/helper2.jpg" class="card-img-top" alt="Helper">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #d32f2f;">Helper: [Helper2 Username]</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Helper: [Helper2 Username]</h5>
                                 <p class="card-text small-text">Helps new players and maintains server rules.</p>
                             </div>
                         </div>
@@ -339,7 +342,7 @@
         <!-- Contact Section -->
         <section id="contact" class="section" data-aos="fade-up">
             <div class="container text-center">
-                <h2 class="minecraft-font mb-5" style="color: #d32f2f;">Contact & Support</h2>
+                <h2 class="minecraft-font mb-5" style="color: #ab47bc;">Contact & Support</h2>
                 <p class="small-text">Join our Discord for support, updates, and community chats!</p>
                 <p class="small-text">Server IP: [Your Server IP]</p>
                 <a href="https://discord.gg/your-discord-invite-link" class="btn btn-lg btn-discord">Join Discord</a>
@@ -347,7 +350,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="bg-black py-4 text-center" style="border-top: 2px solid #d32f2f;">
+        <footer class="bg-black py-4 text-center" style="border-top: 2px solid #ab47bc;">
             <p class="small-text">&copy; 2025 Nothing SMP. All rights reserved.</p>
         </footer>
     </div>
@@ -384,7 +387,7 @@
         particlesJS('particles-js', {
             "particles": {
                 "number": { "value": 25, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#d32f2f" },
+                "color": { "value": "#ab47bc" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.3, "random": true },
                 "size": { "value": 3, "random": true },
