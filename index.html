@@ -16,21 +16,31 @@
         body {
             font-family: 'Arial', sans-serif;
             background-color: #000000; /* Solid black base */
-            color: #ffffff;
+            color: #ffffff; /* White text for visibility */
             overflow-x: hidden;
             margin: 0;
             padding: 0;
         }
         .minecraft-font {
             font-family: 'Press Start 2P', cursive;
-            text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; /* Red glow for text */
+            text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; /* Red glow for headings */
             letter-spacing: 1px;
             line-height: 1.4; /* Improved readability */
+        }
+        .small-text {
+            -webkit-text-stroke: 0.5px #000000; /* Black stroke for small text visibility */
+            text-shadow: 0 0 2px #000000, 0 0 4px #000000; /* Fallback shadow for non-webkit */
+            font-size: 1rem; /* Ensure readability */
+            line-height: 1.6;
+            word-wrap: break-word;
         }
         @media (max-width: 768px) {
             .minecraft-font {
                 font-size: 0.9rem;
                 letter-spacing: 2px; /* Prevent overlap on mobile */
+            }
+            .small-text {
+                font-size: 0.9rem; /* Adjust for mobile */
             }
         }
         #particles-js {
@@ -40,7 +50,7 @@
             top: 0;
             left: 0;
             z-index: -1;
-            opacity: 0.2; /* Subtle professional particles */
+            opacity: 0.2; /* Subtle falling particles */
         }
         .hero {
             background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/hero.jpg'); /* Dark overlay for professionalism */
@@ -120,11 +130,6 @@
         .card-body {
             padding: 1.5rem;
         }
-        .card-text, p {
-            font-size: 1rem;
-            line-height: 1.6; /* Better text flow */
-            word-wrap: break-word; /* Prevent overlap */
-        }
         /* Ensure mobile-friendly layout */
         @media (max-width: 768px) {
             .section {
@@ -136,17 +141,14 @@
             .minecraft-font {
                 font-size: 0.8rem;
             }
-            .display-1 {
-                font-size: 1.8rem;
-            }
-            .lead {
-                font-size: 0.9rem;
+            .small-text {
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Particles Background - Red theme with professional subtlety -->
+    <!-- Falling Particles Background - Red theme -->
     <div id="particles-js"></div>
 
     <!-- Navbar -->
@@ -173,7 +175,7 @@
     <section id="home" class="hero animate-fadeIn">
         <div class="container position-relative">
             <h1 class="display-1 minecraft-font" style="color: #ff0000;">Nothing SMP</h1>
-            <p class="lead">A Lightly Modded Minecraft Survival Multiplayer Server</p>
+            <p class="lead small-text">A Lightly Modded Minecraft Survival Multiplayer Server</p>
             <a href="#contact" class="btn btn-lg btn-discord">Join Us</a>
         </div>
     </section>
@@ -182,7 +184,7 @@
     <section id="about" class="section parallax" style="background-image: url('assets/images/about-bg.jpg');" data-aos="fade-up">
         <div class="container">
             <h2 class="minecraft-font mb-5" style="color: #ff0000;">About Nothing SMP</h2>
-            <p class="text-center">Nothing SMP is a lightly modded Survival Multiplayer server where players can build, explore, and thrive in a friendly community. With fair play as our core, fights occur only for valid reasons. Enjoy custom mods, an economy system, regular events, and more with our 20 dedicated players!</p>
+            <p class="text-center small-text">Nothing SMP is a lightly modded Survival Multiplayer server where players can build, explore, and thrive in a friendly community. With fair play as our core, fights occur only for valid reasons. Enjoy custom mods, an economy system, regular events, and more with our 20 dedicated players!</p>
         </div>
     </section>
 
@@ -195,7 +197,7 @@
                     <div class="card feature-card">
                         <div class="card-body text-center">
                             <h5 class="card-title minecraft-font" style="color: #ff0000;">Lightly Modded</h5>
-                            <p class="card-text">Vanilla-like gameplay with quality-of-life mods for an enhanced experience.</p>
+                            <p class="card-text small-text">Vanilla-like gameplay with quality-of-life mods for an enhanced experience.</p>
                         </div>
                     </div>
                 </div>
@@ -203,7 +205,7 @@
                     <div class="card feature-card">
                         <div class="card-body text-center">
                             <h5 class="card-title minecraft-font" style="color: #ff0000;">Fair PvP</h5>
-                            <p class="card-text">Fights only for valid reasons—no griefing or random attacks.</p>
+                            <p class="card-text small-text">Fights only for valid reasons—no griefing or random attacks.</p>
                         </div>
                     </div>
                 </div>
@@ -211,7 +213,7 @@
                     <div class="card feature-card">
                         <div class="card-body text-center">
                             <h5 class="card-title minecraft-font" style="color: #ff0000;">Economy & Events</h5>
-                            <p class="card-text">Player-driven economy with weekly events and custom builds.</p>
+                            <p class="card-text small-text">Player-driven economy with weekly events and custom builds.</p>
                         </div>
                     </div>
                 </div>
@@ -223,7 +225,7 @@
     <section id="players" class="section parallax" style="background-image: url('assets/images/players-bg.jpg');" data-aos="fade-up">
         <div class="container">
             <h2 class="text-center minecraft-font mb-5" style="color: #ff0000;">Our Players</h2>
-            <p class="text-center">Join our vibrant community of 20 active players collaborating on massive builds, trading resources, and enjoying server events!</p>
+            <p class="text-center small-text">Join our vibrant community of 20 active players collaborating on massive builds, trading resources, and enjoying server events!</p>
         </div>
     </section>
 
@@ -237,7 +239,7 @@
                         <img src="assets/images/owner.jpg" class="card-img-top" alt="Owner">
                         <div class="card-body text-center">
                             <h5 class="card-title minecraft-font" style="color: #ff0000;">Owner: [Your Username]</h5>
-                            <p class="card-text">Founder and administrator of Nothing SMP.</p>
+                            <p class="card-text small-text">Founder and administrator of Nothing SMP.</p>
                         </div>
                     </div>
                 </div>
@@ -246,7 +248,7 @@
                         <img src="assets/images/helper1.jpg" class="card-img-top" alt="Helper">
                         <div class="card-body text-center">
                             <h5 class="card-title minecraft-font" style="color: #ff0000;">Helper: [Helper1 Username]</h5>
-                            <p class="card-text">Assists with moderation and events.</p>
+                            <p class="card-text small-text">Assists with moderation and events.</p>
                         </div>
                     </div>
                 </div>
@@ -255,7 +257,7 @@
                         <img src="assets/images/helper2.jpg" class="card-img-top" alt="Helper">
                         <div class="card-body text-center">
                             <h5 class="card-title minecraft-font" style="color: #ff0000;">Helper: [Helper2 Username]</h5>
-                            <p class="card-text">Helps new players and maintains server rules.</p>
+                            <p class="card-text small-text">Helps new players and maintains server rules.</p>
                         </div>
                     </div>
                 </div>
@@ -267,15 +269,15 @@
     <section id="contact" class="section" data-aos="fade-up">
         <div class="container text-center">
             <h2 class="minecraft-font mb-5" style="color: #ff0000;">Contact & Support</h2>
-            <p>Join our Discord for support, updates, and community chats!</p>
-            <p>Server IP: [Your Server IP]</p>
+            <p class="small-text">Join our Discord for support, updates, and community chats!</p>
+            <p class="small-text">Server IP: [Your Server IP]</p>
             <a href="https://discord.gg/your-discord-invite-link" class="btn btn-lg btn-discord">Join Discord</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-black py-4 text-center" style="border-top: 2px solid #ff0000;">
-        <p>&copy; 2025 Nothing SMP. All rights reserved.</p>
+        <p class="small-text">&copy; 2025 Nothing SMP. All rights reserved.</p>
     </footer>
 
     <!-- Scripts -->
@@ -288,16 +290,24 @@
             once: true
         });
 
-        // Particles Config - Professional red particles
+        // Falling Particles Config - Red theme
         particlesJS('particles-js', {
             "particles": {
-                "number": { "value": 40, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#ff0000" }, // Bright red particles
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ff0000" }, // Red falling particles
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.4, "random": true },
-                "size": { "value": 4, "random": true },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
                 "line_linked": { "enable": false },
-                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+                "move": {
+                    "enable": true,
+                    "speed": 2, // Faster fall
+                    "direction": "top", // Fall from top
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": { "enable": false }
+                }
             },
             "interactivity": {
                 "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
