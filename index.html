@@ -15,94 +15,27 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #9c27b0, #673ab7); /* Violet to purple gradient */
+            background: linear-gradient(135deg, #ff0000, #ff4500); /* Red to orange-red gradient */
             color: #ffffff;
             overflow-x: hidden;
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        #initial-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #9c27b0, #673ab7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        #play-button {
-            background: url('https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/img/play-button.png') no-repeat center;
-            background-size: contain;
-            width: 200px;
-            height: 200px;
-            border: none;
-            cursor: pointer;
-            z-index: 1001;
-            opacity: 0; /* Hidden initially */
-            transition: opacity 0.5s ease;
-        }
-        #play-button.visible {
-            opacity: 1; /* Revealed after delay */
-        }
-        #play-button:hover {
-            transform: scale(1.1);
-        }
-        #loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1002;
-            opacity: 1;
-            transition: opacity 1s ease-in-out;
-        }
-        #loading-bar-container {
-            width: 400px;
-            height: 30px;
-            background: #333333;
-            border: 2px solid #ffffff;
-            border-radius: 5px;
-            overflow: hidden;
-            position: relative;
-        }
-        #loading-bar-fill {
-            width: 0;
-            height: 100%;
-            background: linear-gradient(90deg, #4caf50, #8bc34a); /* Green to light green gradient */
-            animation: load 3s ease-out forwards;
-            box-shadow: 0 0 10px #4caf50;
-        }
-        @keyframes load {
-            0% { width: 0; }
-            100% { width: 100%; }
+            transition: background 0.5s ease;
         }
         #main-content {
-            display: none; /* Hidden until play button is clicked */
             width: 100%;
             height: 100%;
         }
         .minecraft-font {
             font-family: 'Press Start 2P', cursive;
-            text-shadow: 0 0 5px #ab47bc, 0 0 10px #ab47bc; /* Purple glow for headings */
+            text-shadow: 0 0 5px #ff4500, 0 0 10px #ff4500; /* Orange glow for headings */
             letter-spacing: 1px;
             line-height: 1.4;
         }
         .small-text {
             color: #ffffff;
-            text-shadow: 0 0 3px #ab47bc, 0 0 6px #ab47bc; /* Subtle purple glow for small text */
+            text-shadow: 0 0 3px #ff4500, 0 0 6px #ff4500; /* Subtle orange glow for small text */
             font-size: 1rem;
             line-height: 1.6;
             word-wrap: break-word;
@@ -110,8 +43,6 @@
         @media (max-width: 768px) {
             .minecraft-font { font-size: 0.9rem; letter-spacing: 2px; }
             .small-text { font-size: 0.9rem; }
-            #play-button { width: 150px; height: 150px; }
-            #loading-bar-container { width: 250px; height: 20px; }
         }
         #particles-js {
             position: fixed;
@@ -137,46 +68,46 @@
         .navbar {
             background-color: rgba(0, 0, 0, 0.9);
             transition: all 0.4s ease;
-            border-bottom: 2px solid #ab47bc; /* Purple border */
+            border-bottom: 2px solid #ff4500; /* Orange border */
         }
         .navbar.scrolled {
-            background-color: #9c27b0 !important;
-            box-shadow: 0 4px 15px rgba(171, 71, 188, 0.6); /* Purple glow shadow */
+            background-color: #ff4500 !important;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6); /* Orange glow shadow */
         }
         .nav-link {
             color: #ffffff;
             transition: all 0.3s ease;
         }
         .nav-link:hover {
-            color: #ab47bc;
-            text-shadow: 0 0 10px #ab47bc;
+            color: #ff4500;
+            text-shadow: 0 0 10px #ff4500;
         }
         .section {
             padding: 80px 0;
-            background: linear-gradient(135deg, #9c27b0, #673ab7);
+            background: linear-gradient(135deg, #ff0000, #ff4500);
             transition: background 0.5s ease;
         }
         .feature-card, .staff-card {
             background-color: rgba(0, 0, 0, 0.7);
-            border: 2px solid #ab47bc;
+            border: 2px solid #ff4500;
             border-radius: 8px;
             transition: all 0.4s ease;
-            box-shadow: 0 0 10px rgba(171, 71, 188, 0.3);
+            box-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
         }
         .feature-card:hover, .staff-card:hover {
             transform: scale(1.05) translateY(-10px);
-            box-shadow: 0 10px 30px rgba(171, 71, 188, 0.8), 0 0 20px rgba(171, 71, 188, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 69, 0, 0.8), 0 0 20px rgba(255, 69, 0, 0.5);
         }
         .btn-discord {
-            background-color: #ab47bc;
+            background-color: #ff4500;
             border: none;
             color: #ffffff;
             padding: 10px 20px;
             transition: all 0.3s ease;
         }
         .btn-discord:hover {
-            background-color: #8e24aa;
-            box-shadow: 0 0 20px rgba(171, 71, 188, 0.7);
+            background-color: #ff8c00;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.7);
             transform: translateY(-3px);
         }
         .parallax {
@@ -194,7 +125,7 @@
         .card-img-top {
             height: 200px;
             object-fit: cover;
-            border-bottom: 2px solid #ab47bc;
+            border-bottom: 2px solid #ff4500;
         }
         .card-body {
             padding: 1.5rem;
@@ -205,21 +136,20 @@
             .minecraft-font { font-size: 0.8rem; }
             .small-text { font-size: 0.8rem; }
         }
+        /* Scroll-based gradient transition */
+        @keyframes scrollGradient {
+            0% { background: linear-gradient(135deg, #ff0000, #ff4500); }
+            100% { background: linear-gradient(135deg, #ff4500, #ffa500); }
+        }
+        body {
+            animation: scrollGradient 0.5s ease forwards;
+        }
+        body.scrolled {
+            background: linear-gradient(135deg, #ff4500, #ffa500); /* Orange to light orange */
+        }
     </style>
 </head>
 <body>
-    <!-- Initial Screen with Play Button -->
-    <div id="initial-screen">
-        <button id="play-button"></button>
-    </div>
-
-    <!-- Minecraft Loading Screen with Improved Bar -->
-    <div id="loading-screen">
-        <div id="loading-bar-container">
-            <div id="loading-bar-fill"></div>
-        </div>
-    </div>
-
     <!-- Main Content -->
     <div id="main-content">
         <!-- Floating Particles Background -->
@@ -228,7 +158,7 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand minecraft-font" href="#" style="color: #ab47bc;">Nothing SMP</a>
+                <a class="navbar-brand minecraft-font" href="#" style="color: #ff4500;">Nothing SMP</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -248,7 +178,7 @@
         <!-- Hero Section -->
         <section id="home" class="hero animate-fadeIn">
             <div class="container position-relative">
-                <h1 class="display-1 minecraft-font" style="color: #ab47bc;">Nothing SMP</h1>
+                <h1 class="display-1 minecraft-font" style="color: #ff4500;">Nothing SMP</h1>
                 <p class="lead small-text">A Lightly Modded Minecraft Survival Multiplayer Server</p>
                 <a href="#contact" class="btn btn-lg btn-discord">Join Us</a>
             </div>
@@ -257,7 +187,7 @@
         <!-- About Section -->
         <section id="about" class="section parallax" style="background-image: url('assets/images/about-bg.jpg');" data-aos="fade-up">
             <div class="container">
-                <h2 class="minecraft-font mb-5" style="color: #ab47bc;">About Nothing SMP</h2>
+                <h2 class="minecraft-font mb-5" style="color: #ff4500;">About Nothing SMP</h2>
                 <p class="text-center small-text">Nothing SMP is a lightly modded Survival Multiplayer server where players can build, explore, and thrive in a friendly community. With fair play as our core, fights occur only for valid reasons. Enjoy custom mods, an economy system, regular events, and more with our 20 dedicated players!</p>
             </div>
         </section>
@@ -265,12 +195,12 @@
         <!-- Features Section -->
         <section id="features" class="section" data-aos="fade-up">
             <div class="container">
-                <h2 class="text-center minecraft-font mb-5" style="color: #ab47bc;">Server Features</h2>
+                <h2 class="text-center minecraft-font mb-5" style="color: #ff4500;">Server Features</h2>
                 <div class="row">
                     <div class="col-md-4 mb-4">
                         <div class="card feature-card">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Lightly Modded</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ff4500;">Lightly Modded</h5>
                                 <p class="card-text small-text">Vanilla-like gameplay with quality-of-life mods for an enhanced experience.</p>
                             </div>
                         </div>
@@ -278,7 +208,7 @@
                     <div class="col-md-4 mb-4">
                         <div class="card feature-card">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Fair PvP</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ff4500;">Fair PvP</h5>
                                 <p class="card-text small-text">Fights only for valid reasons—no griefing or random attacks.</p>
                             </div>
                         </div>
@@ -286,7 +216,7 @@
                     <div class="col-md-4 mb-4">
                         <div class="card feature-card">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Economy & Events</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ff4500;">Economy & Events</h5>
                                 <p class="card-text small-text">Player-driven economy with weekly events and custom builds.</p>
                             </div>
                         </div>
@@ -298,7 +228,7 @@
         <!-- Players Section -->
         <section id="players" class="section parallax" style="background-image: url('assets/images/players-bg.jpg');" data-aos="fade-up">
             <div class="container">
-                <h2 class="text-center minecraft-font mb-5" style="color: #ab47bc;">Our Players</h2>
+                <h2 class="text-center minecraft-font mb-5" style="color: #ff4500;">Our Players</h2>
                 <p class="text-center small-text">Join our vibrant community of 20 active players collaborating on massive builds, trading resources, and enjoying server events!</p>
             </div>
         </section>
@@ -306,13 +236,13 @@
         <!-- Staff Section -->
         <section id="staff" class="section" data-aos="fade-up">
             <div class="container">
-                <h2 class="text-center minecraft-font mb-5" style="color: #ab47bc;">Meet the Staff</h2>
+                <h2 class="text-center minecraft-font mb-5" style="color: #ff4500;">Meet the Staff</h2>
                 <div class="row justify-content-center">
                     <div class="col-md-4 mb-4">
                         <div class="card staff-card">
                             <img src="assets/images/owner.jpg" class="card-img-top" alt="Owner">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Owner: [Your Username]</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ff4500;">Owner: [Your Username]</h5>
                                 <p class="card-text small-text">Founder and administrator of Nothing SMP.</p>
                             </div>
                         </div>
@@ -321,7 +251,7 @@
                         <div class="card staff-card">
                             <img src="assets/images/helper1.jpg" class="card-img-top" alt="Helper">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Helper: [Helper1 Username]</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ff4500;">Helper: [Helper1 Username]</h5>
                                 <p class="card-text small-text">Assists with moderation and events.</p>
                             </div>
                         </div>
@@ -330,7 +260,7 @@
                         <div class="card staff-card">
                             <img src="assets/images/helper2.jpg" class="card-img-top" alt="Helper">
                             <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ab47bc;">Helper: [Helper2 Username]</h5>
+                                <h5 class="card-title minecraft-font" style="color: #ff4500;">Helper: [Helper2 Username]</h5>
                                 <p class="card-text small-text">Helps new players and maintains server rules.</p>
                             </div>
                         </div>
@@ -342,7 +272,7 @@
         <!-- Contact Section -->
         <section id="contact" class="section" data-aos="fade-up">
             <div class="container text-center">
-                <h2 class="minecraft-font mb-5" style="color: #ab47bc;">Contact & Support</h2>
+                <h2 class="minecraft-font mb-5" style="color: #ff4500;">Contact & Support</h2>
                 <p class="small-text">Join our Discord for support, updates, and community chats!</p>
                 <p class="small-text">Server IP: [Your Server IP]</p>
                 <a href="https://discord.gg/your-discord-invite-link" class="btn btn-lg btn-discord">Join Discord</a>
@@ -350,7 +280,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="bg-black py-4 text-center" style="border-top: 2px solid #ab47bc;">
+        <footer class="bg-black py-4 text-center" style="border-top: 2px solid #ff4500;">
             <p class="small-text">&copy; 2025 Nothing SMP. All rights reserved.</p>
         </footer>
     </div>
@@ -359,35 +289,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Reveal play button after 2 seconds
-        setTimeout(() => {
-            document.getElementById('play-button').classList.add('visible');
-        }, 2000);
-
-        // Play button click to show loading screen and transition to home
-        document.getElementById('play-button').addEventListener('click', () => {
-            document.getElementById('initial-screen').style.display = 'none';
-            document.getElementById('loading-screen').style.display = 'flex';
-            setTimeout(() => {
-                document.getElementById('loading-screen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loading-screen').style.display = 'none';
-                    document.getElementById('main-content').style.display = 'block';
-                    AOS.init({
-                        duration: 1200,
-                        easing: 'ease-in-out',
-                        once: true
-                    });
-                    document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
-                }, 1000); // Fade out duration
-            }, 3000); // Loading screen duration
-        });
-
         // Floating Particles Config
         particlesJS('particles-js', {
             "particles": {
                 "number": { "value": 25, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#ab47bc" },
+                "color": { "value": "#ff4500" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.3, "random": true },
                 "size": { "value": 3, "random": true },
@@ -412,11 +318,21 @@
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
+            const body = document.querySelector('body');
             if (window.scrollY > 100) {
                 navbar.classList.add('scrolled');
+                body.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
+                body.classList.remove('scrolled');
             }
+        });
+
+        // AOS Initialization
+        AOS.init({
+            duration: 1200,
+            easing: 'ease-in-out',
+            once: true
         });
     </script>
 </body>
