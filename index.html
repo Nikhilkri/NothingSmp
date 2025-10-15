@@ -398,9 +398,14 @@
         const audioIcon = document.getElementById('audio-icon');
         let isMuted = false;
 
-        // Ensure video plays continuously
+        // Attempt to play video with sound unmuted by default
+        video.muted = false; // Ensure unmuted by default
         video.play().catch(error => {
-            console.log("Autoplay prevented: ", error);
+            console.log("Autoplay with sound blocked: ", error);
+            // Fallback: Mute initially if autoplay fails, user can unmute
+            video.muted = true;
+            isMuted = true;
+            audioIcon.textContent = '🔇';
         });
 
         function toggleAudio() {
