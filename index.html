@@ -76,15 +76,12 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            border-radius: 30px 0 30px 0; /* Curved corners for non-square look */
-            overflow: hidden;
             transition: all 0.5s ease-in-out;
         }
         .navbar {
             background: rgba(0, 0, 0, 0.85);
             transition: all 0.4s ease-in-out;
             border-bottom: 3px solid #ff0000;
-            border-radius: 20px 20px 0 0; /* Curved top edges */
         }
         .navbar.scrolled {
             background: rgba(0, 0, 0, 0.95);
@@ -103,19 +100,18 @@
             padding: 100px 0;
             background: #ffebee;
             transition: all 0.5s ease-in-out;
-            border-radius: 20px; /* Rounded sections */
         }
         .feature-card, .staff-card {
             background: rgba(0, 0, 0, 0.8);
             border: 3px solid #ff0000;
-            border-radius: 15px; /* Rounded cards */
+            border-radius: 10px; /* Soft curves for cards */
             transition: all 0.4s ease-in-out;
             box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
             overflow: hidden;
         }
         .feature-card:hover, .staff-card:hover {
-            transform: scale(1.07) translateY(-15px);
-            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.9), 0 0 25px rgba(255, 0, 0, 0.6);
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.6);
         }
         .btn-discord {
             background: #ff0000;
@@ -123,19 +119,18 @@
             color: #ffffff;
             padding: 12px 25px;
             font-size: 1.1rem;
-            border-radius: 25px; /* Circular button */
+            border-radius: 5px; /* Slight curve for button */
             transition: all 0.3s ease-in-out;
         }
         .btn-discord:hover {
             background: #cc0000;
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
             transform: translateY(-5px);
         }
         .parallax {
             background-attachment: fixed;
             background-size: cover;
             background-color: rgba(0, 0, 0, 0.6);
-            border-radius: 20px;
             transition: all 0.5s ease-in-out;
         }
         @keyframes fadeIn {
@@ -146,19 +141,18 @@
             animation: fadeIn 1.8s ease-in-out;
         }
         .card-img-top {
-            height: 250px;
+            height: 200px; /* Slightly smaller staff images */
             object-fit: cover;
             border-bottom: 3px solid #ff0000;
-            border-radius: 15px 15px 0 0; /* Rounded top of card image */
             transition: all 0.3s ease-in-out;
         }
         .card-body {
-            padding: 2rem;
-            border-radius: 0 0 15px 15px; /* Rounded bottom of card body */
+            padding: 1.5rem;
+            border-radius: 0 0 10px 10px; /* Bottom curve for card body */
         }
         @media (max-width: 768px) {
             .section { padding: 60px 0; }
-            .card-img-top { height: 180px; }
+            .card-img-top { height: 150px; }
             .minecraft-font { font-size: 0.8rem; }
             .small-text { font-size: 0.85rem; }
             .btn-discord { font-size: 1rem; padding: 10px 20px; }
@@ -171,8 +165,8 @@
             display: inline-block;
             vertical-align: middle;
             margin-right: 15px;
-            border-radius: 50%; /* Circular icon to match Claude AI style */
             border: 3px solid #ff0000;
+            border-radius: 10px; /* Square with 4-side curves */
             box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
             transition: all 0.3s ease-in-out;
         }
@@ -315,7 +309,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="bg-black py-5 text-center" style="border-top: 3px solid #ff0000; border-radius: 0 0 20px 20px;">
+        <footer class="bg-black py-5 text-center" style="border-top: 3px solid #ff0000;">
             <p class="small-text">&copy; 2025 Nothing SMP. All rights reserved. <a href="#home" class="small-text" style="color: #ff3333; text-decoration: none;">Back to Top</a></p>
         </footer>
     </div>
