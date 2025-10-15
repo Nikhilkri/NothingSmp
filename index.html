@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join Nothing SMP, a premium lightly modded Minecraft Survival Multiplayer server built on community, creativity, and fair play.">
-    <title>Nothing SMP - Premium Minecraft Server</title>
+    <meta name="description" content="Join Nothing SMP, a premium lightly modded Minecraft Survival Multiplayer server with a vibrant community.">
+    <title>Nothing SMP - Minecraft Server</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
-            --primary-red: #ff0000;
-            --dark-red: #cc0000;
-            --bg-light: #1a1a1a;
-            --bg-dark: #0d0d0d;
-            --text-light: #ffffff;
-            --text-muted: #b0b0b0;
+            --primary-color: #ff4040;
+            --secondary-color: #1a1a1a;
+            --text-color: #ffffff;
+            --muted-color: #cccccc;
         }
 
         * {
@@ -26,424 +23,154 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-light);
-            overflow-x: hidden;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
             line-height: 1.6;
         }
 
         .minecraft-font {
             font-family: 'Press Start 2P', cursive;
-            line-height: 1.6;
         }
 
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .content-wrapper {
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Navbar */
         .navbar {
-            background: rgba(13, 13, 13, 0.95);
-            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.8);
             padding: 1rem 0;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(255, 0, 0, 0.2);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .navbar.scrolled {
-            background: rgba(13, 13, 13, 0.98);
-            box-shadow: 0 4px 30px rgba(255, 0, 0, 0.3);
+            border-bottom: 2px solid var(--primary-color);
         }
 
         .navbar-brand {
+            color: var(--primary-color);
+            font-size: 1.5rem;
             font-family: 'Press Start 2P', cursive;
-            color: var(--primary-red) !important;
-            font-size: 1rem;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-
-        .navbar-brand:hover {
-            text-shadow: 0 0 15px rgba(255, 0, 0, 1), 0 0 30px rgba(255, 0, 0, 0.7);
-        }
-
-        .server-icon {
-            width: 50px;
-            height: 50px;
-            margin-right: 15px;
-            border: 2px solid var(--primary-red);
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
-            transition: all 0.3s ease;
-        }
-
-        .server-icon:hover {
-            transform: rotate(5deg) scale(1.1);
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
         }
 
         .nav-link {
-            color: var(--text-light) !important;
+            color: var(--text-color) !important;
             font-weight: 500;
-            margin: 0 0.5rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--primary-red);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
+            transition: color 0.3s;
         }
 
         .nav-link:hover {
-            color: var(--primary-red) !important;
+            color: var(--primary-color) !important;
         }
 
-        /* Hero Section */
         .hero {
-            min-height: 100vh;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/players-bg.jpg') center/cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/hero.jpg') center/cover no-repeat fixed;
             position: relative;
-            overflow: hidden;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 2;
+        .hero-content h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s ease-in;
         }
 
-        .hero-icon {
-            width: 150px;
-            height: 150px;
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--muted-color);
             margin-bottom: 2rem;
-            border: 3px solid var(--primary-red);
-            border-radius: 20px;
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.8), 0 0 80px rgba(255, 0, 0, 0.4);
-            animation: float 3s ease-in-out infinite;
-            filter: brightness(1.1);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 10vw, 5rem);
-            margin-bottom: 1.5rem;
-            color: var(--primary-red);
-            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.6), 0 0 60px rgba(255, 0, 0, 0.4), 0 5px 10px rgba(0, 0, 0, 0.8);
-            animation: glow 2s ease-in-out infinite alternate;
-            font-weight: 400;
-            letter-spacing: 0.15rem;
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 10px rgba(255, 0, 0, 0.5), 0 0 20px rgba(255, 0, 0, 0.4), 0 0 30px rgba(255, 0, 0, 0.3), 0 5px 10px rgba(0, 0, 0, 0.8); }
-            to { text-shadow: 0 0 20px rgba(255, 0, 0, 0.9), 0 0 40px rgba(255, 0, 0, 0.7), 0 0 60px rgba(255, 0, 0, 0.5), 0 0 80px rgba(255, 0, 0, 0.3), 0 5px 10px rgba(0, 0, 0, 0.8); }
-        }
-
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-weight: 300;
-        }
-
-        .btn-primary-custom {
-            background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
-            border: none;
-            color: var(--text-light);
-            padding: 1rem 3rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+        .btn-custom {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 0.75rem 2rem;
+            border-radius: 25px;
             text-decoration: none;
-            display: inline-block;
+            transition: transform 0.3s, background-color 0.3s;
         }
 
-        .btn-primary-custom::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
+        .btn-custom:hover {
+            transform: scale(1.05);
+            background-color: #ff6666;
         }
 
-        .btn-primary-custom:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary-custom:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 0, 0, 0.6);
-        }
-
-        /* Sections */
         .section {
-            padding: 100px 0;
-            position: relative;
+            padding: 60px 0;
+            text-align: center;
         }
 
         .section-title {
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            margin-bottom: 3rem;
-            text-align: center;
-            color: var(--primary-red);
-            position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
-        }
-
-        /* Stats Section */
-        .stats-section {
-            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-dark) 100%);
-            padding: 80px 0;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary-red);
-            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
             font-family: 'Press Start 2P', cursive;
         }
 
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* About Section */
         .about-section {
-            background: linear-gradient(rgba(13, 13, 13, 0.85), rgba(13, 13, 13, 0.85)), url('assets/images/about-bg.jpg') center/cover fixed;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/about-bg.jpg') center/cover no-repeat;
         }
 
-        /* Feature Cards */
         .feature-card {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(13, 13, 13, 0.9) 100%);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 2rem;
-            height: 100%;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, var(--primary-red), transparent);
-            border-radius: 15px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: -1;
-        }
-
-        .feature-card:hover::before {
-            opacity: 1;
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 64, 64, 0.3);
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            transition: transform 0.3s;
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.3);
         }
 
         .feature-icon {
-            font-size: 3rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
-            display: block;
+            color: var(--primary-color);
         }
 
-        .feature-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
-
-        .feature-text {
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
-
-        /* Staff Section */
-        .staff-section {
-            background: linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)), url('assets/images/players-bg.jpg') center/cover fixed;
-        }
-
-        .staff-card {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(13, 13, 13, 0.9) 100%);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            border-radius: 15px;
+        .staff-section .card {
+            background-color: rgba(26, 26, 26, 0.9);
+            border: 1px solid rgba(255, 64, 64, 0.3);
+            border-radius: 10px;
             overflow: hidden;
-            transition: all 0.4s ease;
-            height: 100%;
+            transition: transform 0.3s;
         }
 
-        .staff-card:hover {
+        .staff-section .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.3);
         }
 
-        .staff-img-wrapper {
+        .staff-img {
             width: 100%;
-            height: 250px;
-            overflow: hidden;
-            position: relative;
-            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2) 0%, rgba(204, 0, 0, 0.2) 100%);
-        }
-
-        .staff-img-wrapper img {
-            width: 100%;
-            height: 100%;
+            height: 200px;
             object-fit: cover;
-            transition: transform 0.4s ease;
-        }
-
-        .staff-card:hover .staff-img-wrapper img {
-            transform: scale(1.1);
-        }
-
-        .staff-body {
-            padding: 1.5rem;
         }
 
         .staff-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary-red);
-            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
         }
 
-        .staff-role {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .staff-description {
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* Contact Section */
         .contact-section {
-            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-dark) 100%);
-            padding: 100px 0;
+            background-color: var(--secondary-color);
         }
 
         .server-ip {
-            background: rgba(255, 0, 0, 0.1);
-            border: 1px solid var(--primary-red);
-            border-radius: 10px;
-            padding: 1.5rem;
-            font-size: 1.5rem;
-            font-family: 'Courier New', monospace;
-            color: var(--primary-red);
+            background-color: rgba(255, 64, 64, 0.1);
+            padding: 1rem;
+            border-radius: 5px;
             display: inline-block;
-            margin: 2rem 0;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s;
         }
 
         .server-ip:hover {
-            background: rgba(255, 0, 0, 0.2);
-            transform: scale(1.05);
+            background-color: rgba(255, 64, 64, 0.2);
         }
 
-        /* Footer */
-        footer {
-            background: var(--bg-dark);
-            border-top: 1px solid rgba(255, 0, 0, 0.3);
-            padding: 2rem 0;
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .section { padding: 60px 0; }
-            .hero h1 { font-size: 2rem; }
-            .stat-number { font-size: 2rem; }
-            .navbar-brand { font-size: 0.9rem; }
-            .server-icon { width: 40px; height: 40px; }
-            .hero-icon { width: 80px; height: 80px; }
-        }
-
-        /* Smooth Scroll */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Loading Animation */
-        @keyframes fadeInUp {
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
@@ -451,124 +178,111 @@
             }
         }
 
-        .fade-in-up {
-            animation: fadeInUp 1s ease;
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2rem; }
+            .section-title { font-size: 2rem; }
+            .feature-card { margin-bottom: 1rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Falling Particles Background -->
-    <div id="particles-js"></div>
-    
-    <div class="content-wrapper">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="#home">
-                    <img src="assets/images/icon.jpg" alt="Nothing SMP Icon" class="server-icon">
-                    NOTHING SMP
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#staff">Staff</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                    </ul>
-                </div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#home">Nothing SMP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#staff">Staff</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-content container">
-                <img src="assets/images/icon.jpg" alt="Nothing SMP Icon" class="hero-icon fade-in-up">
-                <h1 class="minecraft-font fade-in-up" style="animation-delay: 0.2s;">NOTHING SMP</h1>
-                <p class="fade-in-up" style="animation-delay: 0.4s;">Experience Premium Minecraft Survival Multiplayer</p>
-                <a href="#contact" class="btn-primary-custom fade-in-up" style="animation-delay: 0.6s;">Join Our Server</a>
-            </div>
-        </section>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="minecraft-font">Nothing SMP</h1>
+            <p>Join our premium Minecraft survival experience!</p>
+            <a href="#contact" class="btn-custom">Join Now</a>
+        </div>
+    </section>
 
-        <!-- Stats Section -->
-        <section class="stats-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
-                        <div class="stat-card">
-                            <div class="stat-number">20+</div>
-                            <div class="stat-label">Active Players</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="stat-card">
-                            <div class="stat-number">99%</div>
-                            <div class="stat-label">Uptime</div>
-                        </div>
-                    </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="stat-card">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">Support</div>
-                        </div>
+    <section id="about" class="section about-section">
+        <div class="container">
+            <h2 class="section-title">About Us</h2>
+            <p>Nothing SMP is a lightly modded Survival Multiplayer server designed for a friendly and creative community. With quality-of-life enhancements and a thriving player base, we offer a unique Minecraft experience for all.</p>
+        </div>
+    </section>
+
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <span class="feature-icon">🎮</span>
+                        <h3>Light Mods</h3>
+                        <p>Enhance your gameplay with carefully selected mods.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="section about-section">
-            <div class="container">
-                <h2 class="section-title minecraft-font" data-aos="fade-up">About Us</h2>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
-                        <p style="text-align: center; color: var(--text-muted); font-size: 1.1rem; line-height: 2;">
-                            Nothing SMP is a premium lightly modded Survival Multiplayer server built on community, creativity, and fair play. Our server features quality-of-life enhancements while maintaining the authentic Minecraft experience. With a dedicated player base of 20+ members, regular events, and a thriving economy, we've created the perfect environment for both casual players and hardcore builders.
-                        </p>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <span class="feature-icon">⚔️</span>
+                        <h3>Fair PvP</h3>
+                        <p>Structured PvP with no griefing or random attacks.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <span class="feature-icon">💰</span>
+                        <h3>Economy</h3>
+                        <p>Player-driven economy with shops and trading.</p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Features Section -->
-        <section id="features" class="section">
-            <div class="container">
-                <h2 class="section-title minecraft-font" data-aos="fade-up">Server Features</h2>
-                <div class="row g-4">
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
-                        <div class="feature-card">
-                            <span class="feature-icon">🎮</span>
-                            <h3 class="feature-title">Lightly Modded</h3>
-                            <p class="feature-text">Carefully curated quality-of-life mods that enhance gameplay without compromising the vanilla Minecraft experience.</p>
+    <section id="staff" class="section staff-section">
+        <div class="container">
+            <h2 class="section-title">Our Team</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="assets/images/helper1.jpg" alt="Helper 1" class="staff-img">
+                        <div class="card-body">
+                            <h5 class="staff-name">Helper 1</h5>
+                            <p class="card-text">Head Moderator - Ensures community standards.</p>
                         </div>
                     </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="feature-card">
-                            <span class="feature-icon">⚔️</span>
-                            <h3 class="feature-title">Fair PvP System</h3>
-                            <p class="feature-text">Structured combat rules ensuring fights only occur for valid reasons. No griefing, no random attacks—just fair gameplay.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="feature-card">
-                            <span class="feature-icon">💰</span>
-                            <h3 class="feature-title">Player Economy</h3>
-                            <p class="feature-text">Thriving player-driven economy with shops, trading systems, and resource management for an immersive experience.</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="assets/images/helper2.jpg" alt="Helper 2" class="staff-img">
+                        <div class="card-body">
+                            <h5 class="staff-name">Helper 2</h5>
+                            <p class="card-text">Community Helper - Supports new players.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Staff Section -->
-        <section id="staff" class="section staff-section">
-            <div class="container">
-                <h2 class="section-title minecraft-font" data-aos="fade-up">Meet Our Team</h2>
-                <div class="row g-4">
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
-                        <div class="staff-card">
-                            <div class="staff-img-wrapper">
-                                <img src="assets/images/owner
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <h2 class="section-title">Join Us</h2>
+            <p>Connect with our server today!</p>
+            <div class="server-ip" onclick="navigator.clipboard.writeText('play.nothingsmp.com'); alert('IP copied!');">play.nothingsmp.com</div>
+            <a href="https://discord.gg/example" class="btn-custom mt-3">Join Discord</a>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
