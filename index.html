@@ -101,20 +101,24 @@
             background-color: rgba(0, 0, 0, 0.7);
             border: 2px solid var(--primary-color);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--text-color);
-            font-size: 1.2rem;
             z-index: 10;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .audio-toggle:hover {
             background-color: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
+        .audio-toggle i {
+            font-size: 1.5rem;
+            color: var(--text-color);
         }
 
         .hero-content {
@@ -124,7 +128,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: 100px; /* Adjust for navbar and audio button */
+            padding-top: 100px;
         }
 
         .hero-content h1 {
@@ -267,6 +271,7 @@
             .navbar-brand { font-size: 1.5rem; }
             .nav-link { margin: 0 1rem; }
             .btn-custom { padding: 1rem 2rem; }
+            .audio-toggle { top: 15px; right: 15px; width: 40px; height: 40px; }
         }
     </style>
 </head>
@@ -298,7 +303,7 @@
             Your browser does not support the video tag.
         </video>
         <div class="audio-toggle" onclick="toggleAudio()">
-            <span id="audio-icon">🔊</span>
+            <i id="audio-icon">🔊</i>
         </div>
         <div class="hero-content">
             <h1 class="minecraft-font">Nothing SMP</h1>
@@ -392,6 +397,11 @@
         const video = document.getElementById('background-video');
         const audioIcon = document.getElementById('audio-icon');
         let isMuted = false;
+
+        // Ensure video plays continuously
+        video.play().catch(error => {
+            console.log("Autoplay prevented: ", error);
+        });
 
         function toggleAudio() {
             isMuted = !isMuted;
