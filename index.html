@@ -67,16 +67,33 @@
             opacity: 0.2;
         }
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/hero.jpg');
-            background-size: cover;
-            background-position: center;
+            position: relative;
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            position: relative;
+            overflow: hidden;
             transition: all 0.5s ease-in-out;
+        }
+        #hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.8; /* Subtle overlay effect */
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            z-index: -1;
         }
         .navbar {
             background: rgba(0, 0, 0, 0.85);
@@ -104,14 +121,14 @@
         .feature-card, .staff-card {
             background: rgba(0, 0, 0, 0.8);
             border: 3px solid #ff0000;
-            border-radius: 10px; /* Soft curves for cards */
+            border-radius: 10px;
             transition: all 0.4s ease-in-out;
             box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
             overflow: hidden;
         }
         .feature-card:hover, .staff-card:hover {
-            transform: scale(1.05) translateY(-10px);
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.6);
+            transform: scale(1.05) translateY(-15px);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.9), 0 0 25px rgba(255, 0, 0, 0.6);
         }
         .btn-discord {
             background: #ff0000;
@@ -119,12 +136,12 @@
             color: #ffffff;
             padding: 12px 25px;
             font-size: 1.1rem;
-            border-radius: 5px; /* Slight curve for button */
+            border-radius: 5px;
             transition: all 0.3s ease-in-out;
         }
         .btn-discord:hover {
             background: #cc0000;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
             transform: translateY(-5px);
         }
         .parallax {
@@ -141,18 +158,17 @@
             animation: fadeIn 1.8s ease-in-out;
         }
         .card-img-top {
-            height: 200px; /* Slightly smaller staff images */
+            height: 180px; /* Smaller staff images */
             object-fit: cover;
             border-bottom: 3px solid #ff0000;
             transition: all 0.3s ease-in-out;
         }
         .card-body {
-            padding: 1.5rem;
-            border-radius: 0 0 10px 10px; /* Bottom curve for card body */
+            padding: 2rem;
         }
         @media (max-width: 768px) {
             .section { padding: 60px 0; }
-            .card-img-top { height: 150px; }
+            .card-img-top { height: 140px; }
             .minecraft-font { font-size: 0.8rem; }
             .small-text { font-size: 0.85rem; }
             .btn-discord { font-size: 1rem; padding: 10px 20px; }
@@ -166,7 +182,7 @@
             vertical-align: middle;
             margin-right: 15px;
             border: 3px solid #ff0000;
-            border-radius: 10px; /* Square with 4-side curves */
+            border-radius: 10px; /* Square with soft 4-side curves */
             box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
             transition: all 0.3s ease-in-out;
         }
