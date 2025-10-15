@@ -3,160 +3,432 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nothing SMP - Lightly Modded Minecraft Survival Server</title>
-    <!-- Bootstrap CSS -->
+    <title>Nothing SMP - Premium Minecraft Server</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Pixel Font for Minecraft Touch -->
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <!-- AOS for Scroll Animations -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #ffebee; /* Light red background */
-            color: #ffffff;
-            overflow-x: hidden;
+        :root {
+            --primary-red: #ff0000;
+            --dark-red: #cc0000;
+            --bg-light: #1a1a1a;
+            --bg-dark: #0d0d0d;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            transition: all 0.3s ease-in-out; /* Smooth transitions */
-            user-select: none; /* Prevent text selection */
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE/Edge */
+            box-sizing: border-box;
         }
-        #main-content {
-            width: 100%;
-            height: 100%;
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
+
         .minecraft-font {
             font-family: 'Press Start 2P', cursive;
-            text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000; /* Consistent red glow for main text */
-            letter-spacing: 1px;
-            line-height: 1.4;
-            color: #ff0000; /* Red text color */
-            transition: all 0.3s ease-in-out; /* Smooth text transitions */
-        }
-        .small-text {
-            color: #ffffff;
-            text-shadow: 0 0 3px #ff0000, 0 0 6px #ff0000; /* Red glow for small text */
-            font-size: 1rem;
             line-height: 1.6;
-            word-wrap: break-word;
-            transition: all 0.3s ease-in-out; /* Smooth text transitions */
         }
-        @media (max-width: 768px) {
-            .minecraft-font { font-size: 0.9rem; letter-spacing: 2px; }
-            .small-text { font-size: 0.9rem; }
-        }
+
         #particles-js {
             position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            z-index: -1;
-            opacity: 0.15;
+            z-index: 0;
+            opacity: 0.2;
         }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .navbar.scrolled {
+            background: rgba(13, 13, 13, 0.98);
+            box-shadow: 0 4px 30px rgba(255, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--primary-red) !important;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-red) !important;
+        }
+
+        /* Hero Section */
         .hero {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/hero.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
+            background: linear-gradient(135deg, rgba(13, 13, 13, 0.9) 0%, rgba(26, 26, 26, 0.8) 100%);
             position: relative;
-            transition: all 0.5s ease-in-out; /* Smooth hero transition */
+            overflow: hidden;
         }
-        .navbar {
-            background-color: rgba(0, 0, 0, 0.9);
-            transition: all 0.4s ease-in-out; /* Smoother navbar transition */
-            border-bottom: 2px solid #ff0000; /* Red border */
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 0, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 0, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
         }
-        .navbar.scrolled {
-            background-color: rgba(0, 0, 0, 0.7);
-            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.6); /* Red glow shadow */
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
-        .nav-link {
-            color: #ffffff;
-            transition: all 0.3s ease-in-out; /* Smooth nav link transition */
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
-        .nav-link:hover {
-            color: #ff0000;
-            text-shadow: 0 0 10px #ff0000;
+
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 5rem);
+            margin-bottom: 1.5rem;
+            color: var(--primary-red);
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
         }
-        .section {
-            padding: 80px 0;
-            background: #ffebee; /* Light red background */
-            transition: all 0.5s ease-in-out; /* Smooth section transition */
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
+            to { text-shadow: 0 0 30px rgba(255, 0, 0, 0.8); }
         }
-        .feature-card, .staff-card {
-            background-color: rgba(0, 0, 0, 0.7);
-            border: 2px solid #ff0000;
-            border-radius: 8px;
-            transition: all 0.4s ease-in-out; /* Smoother card transition */
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
         }
-        .feature-card:hover, .staff-card:hover {
-            transform: scale(1.05) translateY(-10px);
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.5);
-        }
-        .btn-discord {
-            background-color: #ff0000;
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--dark-red) 100%);
             border: none;
-            color: #ffffff;
-            padding: 10px 20px;
-            transition: all 0.3s ease-in-out; /* Smoother button transition */
+            color: var(--text-light);
+            padding: 1rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
         }
-        .btn-discord:hover {
-            background-color: #cc0000;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+
+        .btn-primary-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary-custom:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary-custom:hover {
             transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 0, 0, 0.6);
         }
-        .parallax {
-            background-attachment: fixed;
-            background-size: cover;
-            background-color: rgba(0, 0, 0, 0.5);
-            transition: all 0.5s ease-in-out; /* Smooth parallax transition */
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+            position: relative;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .section-title {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--primary-red);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        .animate-fadeIn {
-            animation: fadeIn 1.5s ease-in-out;
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
         }
-        .card-img-top {
-            height: 200px;
+
+        /* Feature Cards */
+        .feature-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(13, 13, 13, 0.9) 100%);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--primary-red), transparent);
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .feature-text {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-dark) 100%);
+            padding: 80px 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Staff Cards */
+        .staff-card {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(13, 13, 13, 0.9) 100%);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+
+        .staff-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.3);
+        }
+
+        .staff-img-wrapper {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2) 0%, rgba(204, 0, 0, 0.2) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .staff-img-wrapper img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-bottom: 2px solid #ff0000;
-            transition: all 0.3s ease-in-out; /* Smooth image transition */
+            transition: transform 0.4s ease;
         }
-        .card-body {
+
+        .staff-card:hover .staff-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .staff-body {
             padding: 1.5rem;
         }
+
+        .staff-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+        }
+
+        .staff-role {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .staff-description {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-light) 100%);
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .server-ip {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid var(--primary-red);
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-size: 1.5rem;
+            font-family: 'Courier New', monospace;
+            color: var(--primary-red);
+            display: inline-block;
+            margin: 2rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .server-ip:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            border-top: 1px solid rgba(255, 0, 0, 0.3);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .section { padding: 40px 0; }
-            .card-img-top { height: 150px; }
-            .minecraft-font { font-size: 0.8rem; }
-            .small-text { font-size: 0.8rem; }
+            .section { padding: 60px 0; }
+            .hero h1 { font-size: 2rem; }
+            .stat-number { font-size: 2rem; }
+            .navbar-brand { font-size: 0.9rem; }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1s ease;
         }
     </style>
 </head>
-<body oncontextmenu="return false;" onselectstart="return false;">
-    <!-- Main Content -->
-    <div id="main-content">
-        <!-- Falling Particles Background -->
-        <div id="particles-js"></div>
-
+<body>
+    <div id="particles-js"></div>
+    
+    <div class="content-wrapper">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand minecraft-font" href="#" style="color: #ff0000;">Nothing SMP</a>
+                <a class="navbar-brand" href="#home">NOTHING SMP</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -165,7 +437,6 @@
                         <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                         <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#players">Players</a></li>
                         <li class="nav-item"><a class="nav-link" href="#staff">Staff</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                     </ul>
@@ -174,173 +445,115 @@
         </nav>
 
         <!-- Hero Section -->
-        <section id="home" class="hero animate-fadeIn">
-            <div class="container position-relative">
-                <h1 class="display-1 minecraft-font" style="color: #ff0000;">Nothing SMP</h1>
-                <p class="lead small-text">A Lightly Modded Minecraft Survival Multiplayer Server</p>
-                <a href="#contact" class="btn btn-lg btn-discord">Join Us</a>
+        <section id="home" class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/hero.jpg') center/cover no-repeat;">
+            <div class="hero-content container">
+                <h1 class="minecraft-font fade-in-up">NOTHING SMP</h1>
+                <p class="fade-in-up" style="animation-delay: 0.2s;">Experience Premium Minecraft Survival Multiplayer</p>
+                <a href="#contact" class="btn-primary-custom fade-in-up" style="animation-delay: 0.4s;">Join Our Server</a>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="stat-card">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-label">Active Players</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-card">
+                            <div class="stat-number">99%</div>
+                            <div class="stat-label">Uptime</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-card">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Support</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="section parallax" style="background-image: url('assets/images/about-bg.jpg');" data-aos="fade-up">
+        <section id="about" class="section" style="background: linear-gradient(rgba(13, 13, 13, 0.85), rgba(13, 13, 13, 0.85)), url('assets/images/about-bg.jpg') center/cover fixed;">
             <div class="container">
-                <h2 class="minecraft-font mb-5" style="color: #ff0000;">About Nothing SMP</h2>
-                <p class="text-center small-text">Nothing SMP is a lightly modded Survival Multiplayer server where players can build, explore, and thrive in a friendly community. With fair play as our core, fights occur only for valid reasons. Enjoy custom mods, an economy system, regular events, and more with our 20 dedicated players!</p>
+                <h2 class="section-title minecraft-font" data-aos="fade-up">About Us</h2>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
+                        <p style="text-align: center; color: var(--text-muted); font-size: 1.1rem; line-height: 2;">
+                            Nothing SMP is a premium lightly modded Survival Multiplayer server built on community, creativity, and fair play. Our server features quality-of-life enhancements while maintaining the authentic Minecraft experience. With a dedicated player base of 20+ members, regular events, and a thriving economy, we've created the perfect environment for both casual players and hardcore builders.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- Features Section -->
-        <section id="features" class="section" data-aos="fade-up">
+        <section id="features" class="section">
             <div class="container">
-                <h2 class="minecraft-font mb-5" style="color: #ff0000;">Server Features</h2>
-                <div class="row">
-                    <div class="col-md-4 mb-4">
-                        <div class="card feature-card">
-                            <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ff0000;">Lightly Modded</h5>
-                                <p class="card-text small-text">Vanilla-like gameplay with quality-of-life mods for an enhanced experience.</p>
-                            </div>
+                <h2 class="section-title minecraft-font" data-aos="fade-up">Server Features</h2>
+                <div class="row g-4">
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="feature-card">
+                            <span class="feature-icon">🎮</span>
+                            <h3 class="feature-title">Lightly Modded</h3>
+                            <p class="feature-text">Carefully curated quality-of-life mods that enhance gameplay without compromising the vanilla Minecraft experience.</p>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card feature-card">
-                            <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ff0000;">Fair PvP</h5>
-                                <p class="card-text small-text">Fights only for valid reasons—no griefing or random attacks.</p>
-                            </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-card">
+                            <span class="feature-icon">⚔️</span>
+                            <h3 class="feature-title">Fair PvP System</h3>
+                            <p class="feature-text">Structured combat rules ensuring fights only occur for valid reasons. No griefing, no random attacks—just fair gameplay.</p>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card feature-card">
-                            <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ff0000;">Economy & Events</h5>
-                                <p class="card-text small-text">Player-driven economy with weekly events and custom builds.</p>
-                            </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-card">
+                            <span class="feature-icon">💰</span>
+                            <h3 class="feature-title">Player Economy</h3>
+                            <p class="feature-text">Thriving player-driven economy with shops, trading systems, and resource management for an immersive experience.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="feature-card">
+                            <span class="feature-icon">🎉</span>
+                            <h3 class="feature-title">Weekly Events</h3>
+                            <p class="feature-text">Regular community events including building contests, treasure hunts, and special seasonal celebrations.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-card">
+                            <span class="feature-icon">🏰</span>
+                            <h3 class="feature-title">Epic Builds</h3>
+                            <p class="feature-text">Collaborative mega-projects and stunning community builds that showcase our players' creativity.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-card">
+                            <span class="feature-icon">🛡️</span>
+                            <h3 class="feature-title">Active Moderation</h3>
+                            <p class="feature-text">Dedicated staff team ensuring a safe, welcoming environment with 24/7 support and quick response times.</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Players Section -->
-        <section id="players" class="section parallax" style="background-image: url('assets/images/players-bg.jpg');" data-aos="fade-up">
-            <div class="container">
-                <h2 class="minecraft-font mb-5" style="color: #ff0000;">Our Players</h2>
-                <p class="text-center small-text">Join our vibrant community of 20 active players collaborating on massive builds, trading resources, and enjoying server events!</p>
             </div>
         </section>
 
         <!-- Staff Section -->
-        <section id="staff" class="section" data-aos="fade-up">
+        <section id="staff" class="section" style="background: linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)), url('assets/images/players-bg.jpg') center/cover fixed;">
             <div class="container">
-                <h2 class="minecraft-font mb-5" style="color: #ff0000;">Meet the Staff</h2>
-                <div class="row justify-content-center">
-                    <div class="col-md-4 mb-4">
-                        <div class="card staff-card">
-                            <img src="assets/images/owner.jpg" class="card-img-top" alt="Owner">
-                            <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ff0000;">Owner: [Your Username]</h5>
-                                <p class="card-text small-text">Founder and administrator of Nothing SMP.</p>
+                <h2 class="section-title minecraft-font" data-aos="fade-up">Meet Our Team</h2>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+                        <div class="staff-card">
+                            <div class="staff-img-wrapper">
+                                <img src="assets/images/owner.jpg" alt="Server Owner">
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card staff-card">
-                            <img src="assets/images/helper1.jpg" class="card-img-top" alt="Helper">
-                            <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ff0000;">Helper: [Helper1 Username]</h5>
-                                <p class="card-text small-text">Assists with moderation and events.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="card staff-card">
-                            <img src="assets/images/helper2.jpg" class="card-img-top" alt="Helper">
-                            <div class="card-body text-center">
-                                <h5 class="card-title minecraft-font" style="color: #ff0000;">Helper: [Helper2 Username]</h5>
-                                <p class="card-text small-text">Helps new players and maintains server rules.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="section" data-aos="fade-up">
-            <div class="container text-center">
-                <h2 class="minecraft-font mb-5" style="color: #ff0000;">Contact & Support</h2>
-                <p class="small-text">Join our Discord for support, updates, and community chats!</p>
-                <p class="small-text">Server IP: [Your Server IP]</p>
-                <a href="https://discord.gg/your-discord-invite-link" class="btn btn-lg btn-discord">Join Discord</a>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="bg-black py-4 text-center" style="border-top: 2px solid #ff0000;">
-            <p class="small-text">&copy; 2025 Nothing SMP. All rights reserved.</p>
-        </footer>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        // Falling Particles Config for Smooth Effect
-        particlesJS('particles-js', {
-            "particles": {
-                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#ff0000" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
-                "size": { "value": 5, "random": true, "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false } },
-                "line_linked": { "enable": false },
-                "move": {
-                    "enable": true,
-                    "speed": 2,
-                    "direction": "bottom", // Falling downward
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 }
-                }
-            },
-            "interactivity": {
-                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
-                "modes": { "repulse": { "distance": 150 }, "push": { "particles_nb": 4 } }
-            },
-            "retina_detect": true
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // AOS Initialization with Smooth Easing
-        AOS.init({
-            duration: 1200,
-            easing: 'ease-in-out',
-            once: true,
-            offset: 100
-        });
-
-        // Disable right-click
-        document.addEventListener('contextmenu', (event) => {
-            event.preventDefault();
-        });
-
-        // Prevent text selection (additional layer)
-        document.addEventListener('selectstart', (event) => {
-            event.preventDefault();
-        });
-    </script>
-</body>
-</html>
+                            <div class="staff-body">
+                                <h3 class="staff-name">[Your Username]</h3>
+                    
