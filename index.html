@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join Nothing SMP, a premium lightly modded Minecraft Survival Multiplayer server built on community, creativity, and fair play.">
     <title>Nothing SMP - Premium Minecraft Server</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -30,7 +31,6 @@
             color: var(--text-light);
             overflow-x: hidden;
             line-height: 1.6;
-            position: relative;
         }
 
         .minecraft-font {
@@ -46,7 +46,6 @@
             left: 0;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.3;
         }
 
         .content-wrapper {
@@ -61,8 +60,8 @@
             padding: 1rem 0;
             transition: all 0.3s ease;
             border-bottom: 1px solid rgba(255, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
+            position: fixed;
+            width: 100%;
             z-index: 1000;
         }
 
@@ -140,27 +139,6 @@
             overflow: hidden;
         }
 
-        #hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-            display: none; /* Placeholder for future MP4 */
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
-            z-index: -1;
-        }
-
         .hero-content {
             position: relative;
             z-index: 2;
@@ -183,7 +161,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 10vw, 6rem);
+            font-size: clamp(2.5rem, 10vw, 5rem);
             margin-bottom: 1.5rem;
             color: var(--primary-red);
             text-shadow: 0 0 20px rgba(255, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.6), 0 0 60px rgba(255, 0, 0, 0.4), 0 5px 10px rgba(0, 0, 0, 0.8);
@@ -297,7 +275,7 @@
             background: linear-gradient(rgba(13, 13, 13, 0.85), rgba(13, 13, 13, 0.85)), url('assets/images/about-bg.jpg') center/cover fixed;
         }
 
-        /* Features Section */
+        /* Feature Cards */
         .feature-card {
             background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(13, 13, 13, 0.9) 100%);
             border: 1px solid rgba(255, 0, 0, 0.3);
@@ -414,8 +392,7 @@
 
         /* Contact Section */
         .contact-section {
-            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-light) 100%);
-            text-align: center;
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-dark) 100%);
             padding: 100px 0;
         }
 
@@ -450,26 +427,32 @@
         /* Responsive */
         @media (max-width: 768px) {
             .section { padding: 60px 0; }
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2rem; }
             .stat-number { font-size: 2rem; }
             .navbar-brand { font-size: 0.9rem; }
             .server-icon { width: 40px; height: 40px; }
             .hero-icon { width: 80px; height: 80px; }
-            .btn-primary-custom { padding: 0.8rem 2rem; font-size: 1rem; }
         }
 
-        /* Animations */
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .fade-in-up {
             animation: fadeInUp 1s ease;
-        }
-
-        html {
-            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -502,12 +485,11 @@
 
         <!-- Hero Section -->
         <section id="home" class="hero">
-            <div class="hero-overlay"></div>
             <div class="hero-content container">
                 <img src="assets/images/icon.jpg" alt="Nothing SMP Icon" class="hero-icon fade-in-up">
-                <h1 class="minecraft-font fade-in-up" style="letter-spacing: 0.2rem;">NOTHING SMP</h1>
-                <p class="fade-in-up" style="animation-delay: 0.2s;">Experience Premium Minecraft Survival Multiplayer</p>
-                <a href="#contact" class="btn-primary-custom fade-in-up" style="animation-delay: 0.4s;">Join Our Server</a>
+                <h1 class="minecraft-font fade-in-up" style="animation-delay: 0.2s;">NOTHING SMP</h1>
+                <p class="fade-in-up" style="animation-delay: 0.4s;">Experience Premium Minecraft Survival Multiplayer</p>
+                <a href="#contact" class="btn-primary-custom fade-in-up" style="animation-delay: 0.6s;">Join Our Server</a>
             </div>
         </section>
 
@@ -577,5 +559,16 @@
                             <p class="feature-text">Thriving player-driven economy with shops, trading systems, and resource management for an immersive experience.</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Staff Section -->
+        <section id="staff" class="section staff-section">
+            <div class="container">
+                <h2 class="section-title minecraft-font" data-aos="fade-up">Meet Our Team</h2>
+                <div class="row g-4">
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
-                        <div cla
+                        <div class="staff-card">
+                            <div class="staff-img-wrapper">
+                                <img src="assets/images/owner
