@@ -43,13 +43,13 @@
             height: 100%;
             top: 0;
             left: 0;
-            z-index: 1;
+            z-index: 0;
             pointer-events: none;
         }
 
         .content-wrapper {
             position: relative;
-            z-index: 2;
+            z-index: 10;
         }
 
         /* Navbar */
@@ -59,6 +59,8 @@
             padding: 1rem 0;
             transition: all 0.3s ease;
             border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+            position: relative;
+            z-index: 1000;
         }
 
         .navbar.scrolled {
@@ -69,10 +71,19 @@
         .navbar-brand {
             font-family: 'Press Start 2P', cursive;
             color: var(--primary-red) !important;
-            font-size: 1.2rem;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+            font-size: 1rem;
+            text-shadow: 
+                0 0 10px rgba(255, 0, 0, 0.8),
+                0 0 20px rgba(255, 0, 0, 0.5);
             display: flex;
             align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            text-shadow: 
+                0 0 15px rgba(255, 0, 0, 1),
+                0 0 30px rgba(255, 0, 0, 0.7);
         }
 
         .server-icon {
@@ -136,13 +147,14 @@
         }
 
         .hero-icon {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             margin-bottom: 2rem;
             border: 3px solid var(--primary-red);
-            border-radius: 15px;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.8), 0 0 80px rgba(255, 0, 0, 0.4);
             animation: float 3s ease-in-out infinite;
+            filter: brightness(1.1);
         }
 
         @keyframes float {
@@ -154,13 +166,32 @@
             font-size: clamp(2rem, 8vw, 5rem);
             margin-bottom: 1.5rem;
             color: var(--primary-red);
-            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            text-shadow: 
+                0 0 20px rgba(255, 0, 0, 0.8),
+                0 0 40px rgba(255, 0, 0, 0.6),
+                0 0 60px rgba(255, 0, 0, 0.4),
+                0 5px 10px rgba(0, 0, 0, 0.8);
             animation: glow 2s ease-in-out infinite alternate;
+            font-weight: 400;
+            letter-spacing: 0.15rem;
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
-            to { text-shadow: 0 0 30px rgba(255, 0, 0, 0.8); }
+            from { 
+                text-shadow: 
+                    0 0 10px rgba(255, 0, 0, 0.5),
+                    0 0 20px rgba(255, 0, 0, 0.4),
+                    0 0 30px rgba(255, 0, 0, 0.3),
+                    0 5px 10px rgba(0, 0, 0, 0.8);
+            }
+            to { 
+                text-shadow: 
+                    0 0 20px rgba(255, 0, 0, 0.9),
+                    0 0 40px rgba(255, 0, 0, 0.7),
+                    0 0 60px rgba(255, 0, 0, 0.5),
+                    0 0 80px rgba(255, 0, 0, 0.3),
+                    0 5px 10px rgba(0, 0, 0, 0.8);
+            }
         }
 
         .hero p {
@@ -552,20 +583,4 @@
                         <div class="feature-card">
                             <span class="feature-icon">🎉</span>
                             <h3 class="feature-title">Weekly Events</h3>
-                            <p class="feature-text">Regular community events including building contests, treasure hunts, and special seasonal celebrations.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="feature-card">
-                            <span class="feature-icon">🏰</span>
-                            <h3 class="feature-title">Epic Builds</h3>
-                            <p class="feature-text">Collaborative mega-projects and stunning community builds that showcase our players' creativity.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="feature-card">
-                            <span class="feature-icon">🛡️</span>
-                            <h3 class="feature-title">Active Moderation</h3>
-                            <p class="feature-text">Dedicated staff team ensuring a safe, welcoming environment with 24/7 support and quick response times.</p>
-                        </div>
-           
+                            <p class="feature-text">Regular community events including building contests, tre
