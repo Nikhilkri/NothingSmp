@@ -92,6 +92,39 @@
             height: 100%;
             object-fit: cover;
             z-index: -1;
+            transition: opacity 0.5s ease;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: -2;
+        }
+
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 64, 64, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 20px;
+            color: var(--muted-color);
+            font-size: 1.2rem;
         }
 
         /* Improved Audio Toggle */
@@ -320,7 +353,16 @@
     </nav>
 
     <section id="home" class="hero">
-        <video id="background-video" class="video-background" autoplay loop muted>
+        <!-- Video Placeholder -->
+        <div class="video-placeholder" id="video-placeholder">
+            <div class="text-center">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Loading video...</div>
+            </div>
+        </div>
+        
+        <!-- Background Video -->
+        <video id="background-video" class="video-background" loop muted preload="auto">
             <source src="assets/images/bgmp4.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -423,14 +465,68 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const video = document.getElementById('background-video');
+        const videoPlaceholder = document.getElementById('video-placeholder');
         const audioToggle = document.getElementById('audio-toggle');
         const audioIcon = document.getElementById('audio-icon');
         const audioStatus = document.getElementById('audio-status');
         let isMuted = true; // Start muted to comply with autoplay policies
+        let videoLoaded = false;
 
         // Initialize video with muted state
         video.muted = isMuted;
         updateAudioUI();
+
+        // Function to preload video and ensure smooth playback
+        function preloadVideo() {
+            // Show loading indicator
+            videoPlaceholder.style.display = 'flex';
+            video.style.opacity = '0';
+            
+            // Set video to preload
+            video.preload = 'auto';
+            
+            // Listen for when enough data is loaded to start playing
+            video.addEventListener('canplaythrough', function() {
+                // Video is ready to play without interruption
+                videoLoaded = true;
+                videoPlaceholder.style.display = 'none';
+                video.style.opacity = '1';
+                
+                // Start playing the video
+                video.play().catch(error => {
+                    console.log("Autoplay blocked: ", error);
+                    // If autoplay fails, we'll try again on user interaction
+                });
+            });
+            
+            // Listen for errors
+            video.addEventListener('error', function() {
+                console.error("Error loading video");
+                videoPlaceholder.innerHTML = '<div class="text-center"><div class="loading-text">Failed to load video</div></div>';
+            });
+            
+            // Listen for progress events to show loading progress
+            video.addEventListener('progress', function() {
+                if (video.buffered.length > 0) {
+                    const bufferedEnd = video.buffered.end(video.buffered.length - 1);
+                    const duration = video.duration;
+                    
+                    if (duration > 0) {
+                        const percentLoaded = (bufferedEnd / duration) * 100;
+                        if (percentLoaded >= 100) {
+                            videoPlaceholder.style.display = 'none';
+                            video.style.opacity = '1';
+                        }
+                    }
+                }
+            });
+            
+            // Force the browser to start loading the video
+            video.load();
+        }
+
+        // Start preloading the video when the page loads
+        window.addEventListener('load', preloadVideo);
 
         // Function to toggle audio
         function toggleAudio() {
@@ -468,30 +564,4 @@
         // Optional: Add keyboard shortcut (M key) for toggling audio
         document.addEventListener('keydown', (event) => {
             if (event.code === 'KeyM') {
-                toggleAudio();
-            }
-        });
-
-        // Try to autoplay with sound on user interaction
-        document.addEventListener('click', function initAudio() {
-            if (isMuted) {
-                // Try to unmute on first user interaction
-                isMuted = false;
-                video.muted = false;
-                updateAudioUI();
-                
-                video.play().catch(error => {
-                    console.log("Autoplay with sound blocked: ", error);
-                    // If autoplay fails, keep muted
-                    isMuted = true;
-                    video.muted = true;
-                    updateAudioUI();
-                });
-                
-                // Remove this event listener after first interaction
-                document.removeEventListener('click', initAudio);
-            }
-        });
-    </script>
-</body>
-</html>
+  
