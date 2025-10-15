@@ -36,12 +36,13 @@
         }
 
         .navbar {
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(0, 0, 0, 0.95);
             padding: 1.5rem 0;
             border-bottom: 3px solid var(--primary-color);
             position: fixed;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         .navbar-brand {
@@ -49,6 +50,7 @@
             font-size: 1.8rem;
             display: flex;
             align-items: center;
+            text-shadow: 0 0 5px var(--primary-color);
         }
 
         .navbar-brand img {
@@ -57,17 +59,23 @@
             margin-right: 10px;
             border: 2px solid var(--primary-color);
             border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        .navbar-brand:hover img {
+            transform: scale(1.1);
         }
 
         .nav-link {
             color: var(--text-color) !important;
             font-weight: 600;
-            margin: 0 1rem;
+            margin: 0 1.5rem;
             transition: color 0.3s;
         }
 
         .nav-link:hover {
             color: var(--primary-color) !important;
+            text-shadow: 0 0 5px var(--primary-color);
         }
 
         .hero {
@@ -86,6 +94,29 @@
             z-index: -1;
         }
 
+        .audio-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            z-index: 10;
+            transition: background-color 0.3s;
+        }
+
+        .audio-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
         .hero-content {
             height: 100%;
             display: flex;
@@ -93,77 +124,84 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: 80px; /* Adjust for fixed navbar */
+            padding-top: 100px; /* Adjust for navbar and audio button */
         }
 
         .hero-content h1 {
-            font-size: 4rem;
+            font-size: 4.5rem;
             color: var(--primary-color);
-            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--primary-color), 0 0 40px var(--primary-color);
             animation: glow 1.5s ease-in-out infinite alternate;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color), 0 0 15px var(--primary-color); }
-            to { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color); }
+            from { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color); }
+            to { text-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color), 0 0 60px var(--primary-color); }
         }
 
         .hero-content p {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--muted-color);
-            margin-bottom: 2.5rem;
-            max-width: 600px;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            font-weight: 400;
         }
 
         .btn-custom {
             background-color: var(--primary-color);
             color: var(--text-color);
-            padding: 1rem 2.5rem;
+            padding: 1.2rem 3rem;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 700;
-            transition: transform 0.3s, background-color 0.3s;
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(255, 64, 64, 0.3);
         }
 
         .btn-custom:hover {
             transform: scale(1.1);
             background-color: #ff6666;
+            box-shadow: 0 8px 20px rgba(255, 64, 64, 0.5);
         }
 
         .section {
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
+            background-color: rgba(0, 0, 0, 0.85);
         }
 
         .section-title {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--primary-color);
             text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             font-family: 'Press Start 2P', cursive;
         }
 
         .about-section {
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(26, 26, 26, 0.9);
         }
 
         .feature-card {
             background-color: rgba(26, 26, 26, 0.95);
-            padding: 2rem;
+            padding: 2.5rem;
             border: 2px solid rgba(255, 64, 64, 0.4);
             border-radius: 15px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
         }
 
         .feature-card:hover {
             transform: translateY(-15px);
-            box-shadow: 0 10px 20px rgba(255, 64, 64, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 64, 64, 0.4);
         }
 
         .feature-icon {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 1.5rem;
             color: var(--primary-color);
         }
@@ -174,50 +212,61 @@
             border-radius: 15px;
             overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
         }
 
         .staff-section .card:hover {
             transform: translateY(-15px);
-            box-shadow: 0 10px 20px rgba(255, 64, 64, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 64, 64, 0.4);
         }
 
         .staff-img {
             width: 100%;
-            height: 250px;
+            height: 300px;
             object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .staff-section .card:hover .staff-img {
+            transform: scale(1.05);
         }
 
         .staff-name {
             color: var(--primary-color);
             font-weight: 700;
-            font-size: 1.5rem;
-            margin-top: 1rem;
+            font-size: 1.6rem;
+            margin-top: 1.5rem;
         }
 
         .contact-section {
             background-color: rgba(0, 0, 0, 0.9);
+            padding-bottom: 120px;
         }
 
         .server-ip {
             background-color: rgba(255, 64, 64, 0.15);
-            padding: 1.5rem;
+            padding: 1.5rem 2rem;
             border-radius: 10px;
             display: inline-block;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .server-ip:hover {
             background-color: rgba(255, 64, 64, 0.25);
+            transform: scale(1.05);
         }
 
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .section-title { font-size: 2rem; }
-            .feature-card { margin-bottom: 1rem; padding: 1rem; }
-            .staff-img { height: 150px; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .section-title { font-size: 2.2rem; }
+            .feature-card { padding: 1.5rem; margin-bottom: 1rem; }
+            .staff-img { height: 200px; }
+            .navbar-brand { font-size: 1.5rem; }
+            .nav-link { margin: 0 1rem; }
+            .btn-custom { padding: 1rem 2rem; }
         }
     </style>
 </head>
@@ -244,13 +293,16 @@
     </nav>
 
     <section id="home" class="hero">
-        <video autoplay loop muted class="video-background">
+        <video id="background-video" class="video-background" autoplay loop>
             <source src="assets/images/bgmp4.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+        <div class="audio-toggle" onclick="toggleAudio()">
+            <span id="audio-icon">🔊</span>
+        </div>
         <div class="hero-content">
             <h1 class="minecraft-font">Nothing SMP</h1>
-            <p>Experience the ultimate Minecraft survival adventure with our premium server.</p>
+            <p>Experience the ultimate premium Minecraft survival adventure.</p>
             <a href="#contact" class="btn-custom">Join Now</a>
         </div>
     </section>
@@ -258,7 +310,7 @@
     <section id="about" class="section about-section">
         <div class="container">
             <h2 class="section-title">About Us</h2>
-            <p>Nothing SMP is a premier lightly modded Survival Multiplayer server, built on a foundation of community, creativity, and fair play. With a dedicated team and a thriving player base, we offer an enhanced Minecraft experience for all skill levels.</p>
+            <p>Nothing SMP is a premier lightly modded Survival Multiplayer server, crafted with a focus on community, creativity, and fair play. Our dedicated team and thriving player base deliver an exceptional Minecraft experience for all.</p>
         </div>
     </section>
 
@@ -277,7 +329,7 @@
                     <div class="feature-card">
                         <span class="feature-icon">⚔️</span>
                         <h3>Fair PvP</h3>
-                        <p>Structured PvP with rules to ensure fair play.</p>
+                        <p>Structured PvP with rules ensuring fair play.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -329,12 +381,23 @@
     <section id="contact" class="section contact-section">
         <div class="container">
             <h2 class="section-title">Join Us</h2>
-            <p>Become part of our community today!</p>
+            <p>Become part of our thriving community today!</p>
             <div class="server-ip" onclick="navigator.clipboard.writeText('play.nothingsmp.com'); alert('IP copied!');">play.nothingsmp.com</div>
-            <a href="https://discord.gg/example" class="btn-custom mt-4">Join Discord</a>
+            <a href="https://discord.gg/example" class="btn-custom mt-5" target="_blank" rel="noopener noreferrer">Join Discord</a>
         </div>
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const video = document.getElementById('background-video');
+        const audioIcon = document.getElementById('audio-icon');
+        let isMuted = false;
+
+        function toggleAudio() {
+            isMuted = !isMuted;
+            video.muted = isMuted;
+            audioIcon.textContent = isMuted ? '🔇' : '🔊';
+        }
+    </script>
 </body>
 </html>
