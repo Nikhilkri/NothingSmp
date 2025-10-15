@@ -29,6 +29,19 @@
             color: var(--text-color);
             line-height: 1.6;
             overflow-x: hidden;
+            /* Prevent text selection for entire body */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Allow selection only for server IP */
+        .server-ip {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
         }
 
         .minecraft-font {
@@ -318,6 +331,17 @@
             transform: scale(1.05);
         }
 
+        /* Context menu blocker */
+        .context-menu-blocker {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.8rem; }
             .section-title { font-size: 2.2rem; }
@@ -331,6 +355,9 @@
     </style>
 </head>
 <body>
+    <!-- Context menu blocker (hidden by default) -->
+    <div class="context-menu-blocker" id="context-menu-blocker"></div>
+
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="#home">
@@ -362,7 +389,7 @@
         </div>
         
         <!-- Background Video -->
-        <video id="background-video" class="video-background" loop muted preload="auto">
+        <video id="background-video" class="video-background" loop muted playsinline preload="auto">
             <source src="assets/images/bgmp4.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -469,15 +496,79 @@
         const audioToggle = document.getElementById('audio-toggle');
         const audioIcon = document.getElementById('audio-icon');
         const audioStatus = document.getElementById('audio-status');
+        const contextMenuBlocker = document.getElementById('context-menu-blocker');
         let isMuted = true; // Start muted to comply with autoplay policies
         let videoLoaded = false;
+        let playAttempted = false;
 
         // Initialize video with muted state
         video.muted = isMuted;
         updateAudioUI();
 
-        // Function to preload video and ensure smooth playback
-        function preloadVideo() {
+        // ========== COPY PROTECTION ==========
+        
+        // Prevent text selection for all elements except server IP
+        document.addEventListener('selectstart', function(e) {
+            // Allow selection only for server IP elements
+            if (!e.target.classList.contains('server-ip')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent right-click context menu except on server IP
+        document.addEventListener('contextmenu', function(e) {
+            // Allow right-click only on server IP elements
+            if (!e.target.classList.contains('server-ip')) {
+                e.preventDefault();
+                
+                // Show blocker briefly to prevent any context menu
+                contextMenuBlocker.style.display = 'block';
+                setTimeout(() => {
+                    contextMenuBlocker.style.display = 'none';
+                }, 100);
+                
+                return false;
+            }
+        });
+
+        // Prevent copy action except for server IP
+        document.addEventListener('copy', function(e) {
+            const selection = window.getSelection();
+            const selectedText = selection.toString();
+            
+            // Check if the selection contains server IP
+            const serverIpElement = document.querySelector('.server-ip');
+            const serverIpText = serverIpElement ? serverIpElement.textContent : '';
+            
+            // Allow copying only if the selection is exactly the server IP
+            if (selectedText.trim() !== serverIpText.trim()) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Prevent cut action
+        document.addEventListener('cut', function(e) {
+            e.preventDefault();
+            return false;
+        });
+
+        // Prevent drag and drop of text
+        document.addEventListener('dragstart', function(e) {
+            if (!e.target.classList.contains('server-ip')) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // ========== VIDEO PLAYBACK ==========
+
+        // Function to start video playback
+        function startVideoPlayback() {
+            if (playAttempted) return;
+            playAttempted = true;
+            
             // Show loading indicator
             videoPlaceholder.style.display = 'flex';
             video.style.opacity = '0';
@@ -485,83 +576,5 @@
             // Set video to preload
             video.preload = 'auto';
             
-            // Listen for when enough data is loaded to start playing
-            video.addEventListener('canplaythrough', function() {
-                // Video is ready to play without interruption
-                videoLoaded = true;
-                videoPlaceholder.style.display = 'none';
-                video.style.opacity = '1';
-                
-                // Start playing the video
-                video.play().catch(error => {
-                    console.log("Autoplay blocked: ", error);
-                    // If autoplay fails, we'll try again on user interaction
-                });
-            });
-            
-            // Listen for errors
-            video.addEventListener('error', function() {
-                console.error("Error loading video");
-                videoPlaceholder.innerHTML = '<div class="text-center"><div class="loading-text">Failed to load video</div></div>';
-            });
-            
-            // Listen for progress events to show loading progress
-            video.addEventListener('progress', function() {
-                if (video.buffered.length > 0) {
-                    const bufferedEnd = video.buffered.end(video.buffered.length - 1);
-                    const duration = video.duration;
-                    
-                    if (duration > 0) {
-                        const percentLoaded = (bufferedEnd / duration) * 100;
-                        if (percentLoaded >= 100) {
-                            videoPlaceholder.style.display = 'none';
-                            video.style.opacity = '1';
-                        }
-                    }
-                }
-            });
-            
-            // Force the browser to start loading the video
-            video.load();
-        }
-
-        // Start preloading the video when the page loads
-        window.addEventListener('load', preloadVideo);
-
-        // Function to toggle audio
-        function toggleAudio() {
-            isMuted = !isMuted;
-            video.muted = isMuted;
-            updateAudioUI();
-            
-            // If unmuting, try to play the video (required for some browsers)
-            if (!isMuted) {
-                video.play().catch(error => {
-                    console.log("Could not play video: ", error);
-                    // If play fails, revert to muted state
-                    isMuted = true;
-                    video.muted = true;
-                    updateAudioUI();
-                    alert("Your browser requires user interaction to play audio. Please click the page first.");
-                });
-            }
-        }
-
-        // Update the UI based on current audio state
-        function updateAudioUI() {
-            if (isMuted) {
-                audioIcon.textContent = '🔇';
-                audioStatus.textContent = 'Sound Off';
-            } else {
-                audioIcon.textContent = '🔊';
-                audioStatus.textContent = 'Sound On';
-            }
-        }
-
-        // Add click event to toggle button
-        audioToggle.addEventListener('click', toggleAudio);
-
-        // Optional: Add keyboard shortcut (M key) for toggling audio
-        document.addEventListener('keydown', (event) => {
-            if (event.code === 'KeyM') {
-  
+            // Add event listeners for video state
+       
