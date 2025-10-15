@@ -125,21 +125,9 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/hero.jpg') center/cover no-repeat fixed;
             position: relative;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
         }
 
         .hero-content {
@@ -246,6 +234,35 @@
             background: linear-gradient(90deg, transparent, var(--primary-red), transparent);
         }
 
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-dark) 100%);
+            padding: 80px 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-red);
+            margin-bottom: 0.5rem;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(rgba(13, 13, 13, 0.85), rgba(13, 13, 13, 0.85)), url('assets/images/about-bg.jpg') center/cover fixed;
+        }
+
         /* Feature Cards */
         .feature-card {
             background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(13, 13, 13, 0.9) 100%);
@@ -299,31 +316,11 @@
             line-height: 1.8;
         }
 
-        /* Stats Section */
-        .stats-section {
-            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-dark) 100%);
-            padding: 80px 0;
+        /* Staff Section */
+        .staff-section {
+            background: linear-gradient(rgba(26, 26, 26, 0.9), rgba(26, 26, 26, 0.9)), url('assets/images/players-bg.jpg') center/cover fixed;
         }
 
-        .stat-card {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--primary-red);
-            margin-bottom: 0.5rem;
-            font-family: 'Press Start 2P', cursive;
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        /* Staff Cards */
         .staff-card {
             background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(13, 13, 13, 0.9) 100%);
             border: 1px solid rgba(255, 0, 0, 0.3);
@@ -343,7 +340,7 @@
             height: 250px;
             overflow: hidden;
             position: relative;
-            background: linear-gradient(135deg, rgba(255, 0, 0, 0.1) 0%, rgba(204, 0, 0, 0.1) 100%);
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2) 0%, rgba(204, 0, 0, 0.2) 100%);
         }
 
         .staff-img-wrapper img {
@@ -416,29 +413,6 @@
             color: var(--text-muted);
         }
 
-        /* Parallax Background Sections */
-        .parallax-section {
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
-        }
-
-        .parallax-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(13, 13, 13, 0.85);
-        }
-
-        .parallax-section .container {
-            position: relative;
-            z-index: 1;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .section { padding: 60px 0; }
@@ -473,7 +447,7 @@
 </head>
 <body>
     <!-- Falling Particles Background -->
-    <canvas id="particles-js"></canvas>
+    <div id="particles-js"></div>
     
     <div class="content-wrapper">
         <!-- Navbar -->
@@ -499,10 +473,10 @@
         </nav>
 
         <!-- Hero Section -->
-        <section id="home" class="hero" style="background-image: url('assets/images/hero.jpg');">
+        <section id="home" class="hero">
             <div class="hero-content container">
                 <img src="assets/images/icon.jpg" alt="Nothing SMP Icon" class="hero-icon fade-in-up">
-                <h1 class="minecraft-font fade-in-up">NOTHING SMP</h1>
+                <h1 class="minecraft-font fade-in-up" style="font-size: clamp(2.5rem, 10vw, 6rem); letter-spacing: 0.2rem;">NOTHING SMP</h1>
                 <p class="fade-in-up" style="animation-delay: 0.2s;">Experience Premium Minecraft Survival Multiplayer</p>
                 <a href="#contact" class="btn-primary-custom fade-in-up" style="animation-delay: 0.4s;">Join Our Server</a>
             </div>
@@ -535,12 +509,12 @@
         </section>
 
         <!-- About Section -->
-        <section id="about" class="section parallax-section" style="background-image: url('assets/images/about-bg.jpg');">
+        <section id="about" class="section about-section">
             <div class="container">
                 <h2 class="section-title minecraft-font" data-aos="fade-up">About Us</h2>
                 <div class="row justify-content-center">
                     <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
-                        <p style="text-align: center; color: var(--text-light); font-size: 1.1rem; line-height: 2;">
+                        <p style="text-align: center; color: var(--text-muted); font-size: 1.1rem; line-height: 2;">
                             Nothing SMP is a premium lightly modded Survival Multiplayer server built on community, creativity, and fair play. Our server features quality-of-life enhancements while maintaining the authentic Minecraft experience. With a dedicated player base of 20+ members, regular events, and a thriving economy, we've created the perfect environment for both casual players and hardcore builders.
                         </p>
                     </div>
@@ -588,4 +562,10 @@
                             <p class="feature-text">Collaborative mega-projects and stunning community builds that showcase our players' creativity.</p>
                         </div>
                     </div>
-                    <div class="c
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-card">
+                            <span class="feature-icon">🛡️</span>
+                            <h3 class="feature-title">Active Moderation</h3>
+                            <p class="feature-text">Dedicated staff team ensuring a safe, welcoming environment with 24/7 support and quick response times.</p>
+                        </div>
+           
